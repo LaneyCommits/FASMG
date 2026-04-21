@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline'
+import { ArrowDownTrayIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Section from '../components/Section'
 import events from '../data/events.json'
-import { formatEventDate, groupEventsByMonth } from '../utils/getUpcomingEvents'
+import { formatEventDate } from '../utils/getUpcomingEvents'
 import styles from './EventsPage.module.css'
 
 const CALENDAR_PDF = `${import.meta.env.BASE_URL}fasmgcalendar.pdf`
@@ -22,14 +22,75 @@ function typeLabel(type) {
   return 'Event'
 }
 
+/** @param {{ y: number; m: number }} c — `m` is 0–11 */
+function addMonths(c, delta) {
+  const d = new Date(c.y, c.m + delta, 1)
+  return { y: d.getFullYear(), m: d.getMonth() }
+}
+
+/** @param {string} iso */
+function parseEventMonth(iso) {
+  const [y, mo] = iso.split('-').map(Number)
+  return { y, m: mo - 1 }
+}
+
+/** @param {object[]} evts */
+function firstEventMonth(evts) {
+  if (!evts.length) {
+    const n = new Date()
+    return { y: n.getFullYear(), m: n.getMonth() }
+  }
+  const sorted = [...evts].sort((a, b) => a.date.localeCompare(b.date) || a.id - b.id)
+  return parseEventMonth(sorted[0].date)
+}
+
+/** @param {{ y: number; m: number }} a @param {{ y: number; m: number }} b */
+function compareMonth(a, b) {
+  if (a.y !== b.y) return a.y - b.y
+  return a.m - b.m
+}
+
 export default function EventsPage() {
   const [filter, setFilter] = useState('all')
+  const [cursor, setCursor] = useState(() => firstEventMonth(events))
 
-  const grouped = useMemo(() => {
-    const list =
-      filter === 'all' ? events : events.filter((e) => e.type === filter)
-    return groupEventsByMonth(list)
-  }, [filter])
+  const filteredEvents = useMemo(
+    () => (filter === 'all' ? events : events.filter((e) => e.type === filter)),
+    [filter],
+  )
+
+  function setFilterAndMonth(nextFilter) {
+    const list = nextFilter === 'all' ? events : events.filter((e) => e.type === nextFilter)
+    setFilter(nextFilter)
+    setCursor(firstEventMonth(list))
+  }
+
+  const monthBounds = useMemo(() => {
+    if (!filteredEvents.length) return null
+    const sorted = [...filteredEvents].sort((a, b) => a.date.localeCompare(b.date) || a.id - b.id)
+    return {
+      min: parseEventMonth(sorted[0].date),
+      max: parseEventMonth(sorted[sorted.length - 1].date),
+    }
+  }, [filteredEvents])
+
+  const monthLabel = useMemo(
+    () =>
+      new Date(cursor.y, cursor.m, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+    [cursor],
+  )
+
+  const monthEvents = useMemo(() => {
+    return filteredEvents
+      .filter((e) => {
+        const [y, mo] = e.date.split('-').map(Number)
+        return y === cursor.y && mo - 1 === cursor.m
+      })
+      .sort((a, b) => a.date.localeCompare(b.date) || a.id - b.id)
+  }, [filteredEvents, cursor])
+
+  const canPrev = monthBounds && compareMonth(cursor, monthBounds.min) > 0
+  const canNext = monthBounds && compareMonth(cursor, monthBounds.max) < 0
 
   return (
     <Section className={styles.page}>
@@ -56,7 +117,7 @@ export default function EventsPage() {
             key={f.id}
             type="button"
             className={`${styles.filterBtn} ${filter === f.id ? styles.filterBtnActive : ''}`}
-            onClick={() => setFilter(f.id)}
+            onClick={() => setFilterAndMonth(f.id)}
             aria-pressed={filter === f.id}
           >
             {f.label}
@@ -64,20 +125,39 @@ export default function EventsPage() {
         ))}
       </div>
 
-      {grouped.length === 0 ? (
-        <p className={styles.lede}>No events match this filter.</p>
+      {filteredEvents.length === 0 ? (
+        <p className={styles.emptyFilter}>No events match this filter.</p>
       ) : (
-        grouped.map((group) => (
-          <section
-            key={group.heading}
-            className={styles.monthBlock}
-            aria-labelledby={`month-${group.items[0]?.date ?? group.heading}`}
-          >
-            <h2 id={`month-${group.items[0]?.date ?? 'unknown'}`} className={styles.monthHeading}>
-              {group.heading}
+        <section className={styles.monthSection} aria-labelledby="events-month-heading">
+          <div className={styles.monthNav}>
+            <button
+              type="button"
+              className={styles.monthNavBtn}
+              onClick={() => setCursor((c) => addMonths(c, -1))}
+              disabled={!canPrev}
+              aria-label="Previous month"
+            >
+              <ChevronLeftIcon className={styles.monthNavIcon} aria-hidden />
+            </button>
+            <h2 id="events-month-heading" className={styles.monthHeading}>
+              {monthLabel}
             </h2>
+            <button
+              type="button"
+              className={styles.monthNavBtn}
+              onClick={() => setCursor((c) => addMonths(c, 1))}
+              disabled={!canNext}
+              aria-label="Next month"
+            >
+              <ChevronRightIcon className={styles.monthNavIcon} aria-hidden />
+            </button>
+          </div>
+
+          {monthEvents.length === 0 ? (
+            <p className={styles.emptyMonth}>No events in {monthLabel} for this filter.</p>
+          ) : (
             <ul className={styles.eventList}>
-              {group.items.map((ev) => (
+              {monthEvents.map((ev) => (
                 <li key={ev.id} className={styles.eventCard}>
                   <div className={styles.eventTop}>
                     <h3 className={styles.eventTitle}>{ev.title}</h3>
@@ -96,8 +176,8 @@ export default function EventsPage() {
                 </li>
               ))}
             </ul>
-          </section>
-        ))
+          )}
+        </section>
       )}
     </Section>
   )

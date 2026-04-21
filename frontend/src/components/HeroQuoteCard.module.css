@@ -12,11 +12,11 @@
 .card {
   position: absolute;
   z-index: 3;
-  right: clamp(0.35rem, 1.5vw, 0.75rem);
-  bottom: clamp(0.35rem, 1.5vw, 0.75rem);
+  right: clamp(0.75rem, 2vw, 1.25rem);
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
   left: auto;
   top: auto;
-  max-width: min(168px, 40vw);
+  max-width: min(168px, 32vw);
   padding: 0.55rem 0.65rem 0.62rem;
   text-align: right;
   transform: rotate(-1.25deg);
@@ -28,39 +28,13 @@
     #f3ebe0 72%,
     #ebe2d4 100%
   );
-  /* Torn-paper silhouette */
   clip-path: polygon(
-    0% 2%,
-    4% 0%,
-    12% 1%,
-    22% 0%,
-    35% 2%,
-    48% 0%,
-    62% 2%,
-    78% 0%,
-    92% 2%,
-    100% 0%,
-    99% 12%,
-    100% 28%,
-    98% 44%,
-    100% 58%,
-    99% 72%,
-    100% 88%,
-    98% 100%,
-    82% 99%,
-    64% 100%,
-    48% 98%,
-    32% 100%,
-    16% 99%,
-    0% 100%,
-    1% 86%,
-    0% 70%,
-    2% 54%,
-    0% 38%,
-    2% 22%,
-    0% 8%
+    0% 2%, 4% 0%, 12% 1%, 22% 0%, 35% 2%, 48% 0%, 62% 2%,
+    78% 0%, 92% 2%, 100% 0%, 99% 12%, 100% 28%, 98% 44%,
+    100% 58%, 99% 72%, 100% 88%, 98% 100%, 82% 99%, 64% 100%,
+    48% 98%, 32% 100%, 16% 99%, 0% 100%, 1% 86%, 0% 70%,
+    2% 54%, 0% 38%, 2% 22%, 0% 8%
   );
-  /* Shadow follows the clipped shape */
   filter: drop-shadow(0 6px 12px rgba(26, 54, 93, 0.1)) drop-shadow(0 1px 2px rgba(26, 54, 93, 0.05));
 }
 
@@ -96,10 +70,21 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 720px) {
   .card {
-    max-width: min(158px, 52vw);
-    padding: 0.5rem 0.58rem 0.55rem;
+    max-width: min(128px, 36vw);
+    right: clamp(0.55rem, 1.5vw, 0.75rem);
+    bottom: clamp(3.5rem, 10vw, 5rem);
+    padding: 0.42rem 0.52rem 0.46rem;
     transform: rotate(-0.5deg);
+  }
+
+  .artist {
+    font-size: clamp(0.64rem, 2.4vw, 0.74rem);
+  }
+
+  .title {
+    font-size: clamp(0.54rem, 2vw, 0.62rem);
+    margin-top: 0.15rem;
   }
 }

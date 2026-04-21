@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -38,13 +37,8 @@ export default function Footer() {
           </a>
         </div>
 
-        <nav className={styles.secondary} aria-label="Footer">
-          <Link to="/about">Board Members</Link>
-          <span className={styles.dot}>·</span>
-          <Link to="/about">Contact</Link>
-        </nav>
+        <p className={styles.copy}>© {new Date().getFullYear()} Fine Arts Society of Middle GA. All rights reserved.</p>
       </div>
-      <p className={styles.copy}>© {new Date().getFullYear()} Fine Arts Society of Middle GA. All rights reserved.</p>
     </footer>
   )
 }

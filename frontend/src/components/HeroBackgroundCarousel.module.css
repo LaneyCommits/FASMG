@@ -3,7 +3,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-color: var(--color-cream);
+  background-color: var(--color-navy);
 }
 
 .viewport {
@@ -33,40 +33,30 @@
   position: relative;
   height: 100%;
   min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.45rem;
+  flex-shrink: 0;
+  display: block;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* Light mat — no orange frame */
 .slideMat {
-  box-sizing: border-box;
   width: 100%;
   height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(0.35rem, 1.2vw, 0.55rem);
-  background: linear-gradient(160deg, rgba(255, 254, 249, 0.98), rgba(250, 244, 234, 0.96));
-  border: 1px solid rgba(26, 54, 93, 0.1);
-  border-radius: 6px 22px 10px 26px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.65),
-    0 10px 26px rgba(26, 54, 93, 0.06);
+  display: block;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .slideImg {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
   display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
 }
 
 .visuallyHidden {

@@ -19,7 +19,7 @@ function preloadImages(urls) {
   )
 }
 
-export default function HeroBackgroundCarousel({ onActivePieceChange }) {
+export default function HeroBackgroundCarousel({ onActivePieceChange, onIndexChange }) {
   const originalCount = heroBackgroundArt.length
   const slides = useMemo(
     () =>
@@ -67,6 +67,10 @@ export default function HeroBackgroundCarousel({ onActivePieceChange }) {
     if (!onActivePieceChange || !piece) return
     onActivePieceChange(piece)
   }, [piece, onActivePieceChange])
+
+  useEffect(() => {
+    onIndexChange?.(pieceIndex)
+  }, [pieceIndex, onIndexChange])
 
   const onTransitionEnd = useCallback(
     (e) => {

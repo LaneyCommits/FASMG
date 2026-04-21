@@ -7,3 +7,9 @@
 .main {
   flex: 1;
 }
+
+@media (max-width: 720px) {
+  .main {
+    padding-bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}

@@ -1,20 +1,19 @@
 .hero {
-  padding: clamp(1rem, 2.5vw, 1.75rem) 0 clamp(0.15rem, 0.75vw, 0.35rem);
+  padding: clamp(0.5rem, 1.5vw, 1rem) 0 clamp(0.15rem, 0.75vw, 0.35rem);
 }
 
 .heroNoAnim .inner,
 .heroNoAnim .mediaOverlay,
-.heroNoAnim .copy,
-.heroNoAnim .wash {
+.heroNoAnim .copy {
   transition: none !important;
   animation: none !important;
 }
 
-.heroNoAnim .actions a {
+.heroNoAnim .actions a.heroCta {
   transition: none !important;
 }
 
-.heroNoAnim .actions a:hover {
+.heroNoAnim .actions a.heroCta:hover {
   transform: none;
 }
 
@@ -23,137 +22,207 @@
   width: 100%;
   max-width: var(--max-content);
   margin-inline: auto;
-  min-height: clamp(440px, 64vh, 760px);
+  min-height: clamp(380px, 62vh, 760px);
   overflow: hidden;
-  border-radius: 24px;
   isolation: isolate;
   display: grid;
-  /* Half hero for copy, half for carousel */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: stretch;
-  gap: clamp(1rem, 2.5vw, 2rem);
-  padding: clamp(1.25rem, 3vw, 2.25rem) clamp(1rem, 2.5vw, 1.75rem);
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: end;
 }
 
-.copyCol {
-  position: relative;
-  z-index: 2;
-  min-width: 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-}
-
+/* Background carousel layer */
 .mediaCol {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 0;
-  min-width: 0;
-  min-height: 0;
-  height: 100%;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
   overflow: hidden;
-  isolation: isolate;
+  border-radius: inherit;
 }
 
 .mediaViewport {
-  position: relative;
-  flex: 1 1 auto;
-  width: 100%;
-  min-height: clamp(320px, 50vh, 640px);
-  border-radius: inherit;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 
+/* Gradient: transparent top → dark bottom for text readability */
 .mediaOverlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  /* Light touch so framed “contain” artwork stays readable */
   background: linear-gradient(
-    100deg,
-    rgba(253, 251, 247, 0.12) 0%,
-    rgba(253, 251, 247, 0.04) 40%,
-    transparent 60%,
-    rgba(26, 54, 93, 0.06) 100%
+    to bottom,
+    transparent 0%,
+    transparent 25%,
+    rgba(26, 54, 93, 0.18) 45%,
+    rgba(26, 54, 93, 0.52) 62%,
+    rgba(26, 54, 93, 0.78) 78%,
+    rgba(15, 36, 68, 0.92) 100%
   );
   pointer-events: none;
 }
 
-.copy {
+/* Copy layer: sits at the bottom of the hero */
+.copyCol {
   position: relative;
-  flex: 1 1 auto;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  min-height: 0;
-  max-width: 100%;
-  padding: clamp(0.5rem, 1.5vw, 1rem) 0;
-  border-radius: 20px;
-  overflow: hidden;
+  justify-content: flex-end;
+  padding: clamp(1rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.25rem);
 }
 
-.wash {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(226, 135, 67, 0.1), transparent 45%),
-    radial-gradient(circle at 80% 20%, rgba(163, 193, 173, 0.22), transparent 50%),
-    linear-gradient(165deg, rgba(255, 255, 255, 0.55), rgba(253, 251, 247, 0.72));
-  pointer-events: none;
-  z-index: 0;
-}
-
-.tagline,
-.headline,
-.lede,
-.actions {
+.quoteAnchor {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 3;
   position: relative;
-  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  max-width: min(34rem, 100%);
+}
+
+.headline {
+  margin: 0 0 clamp(0.25rem, 0.8vw, 0.5rem);
+  font-size: clamp(1.65rem, 3.5vw + 0.85rem, 2.85rem);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(15, 36, 68, 0.35);
+  line-height: 1.08;
 }
 
 .tagline {
   font-family: var(--font-script);
-  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-size: clamp(1.2rem, 2.2vw + 0.5rem, 1.85rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--color-orange);
-  margin: 0 0 0.5rem;
-}
-
-.headline {
-  margin: 0 0 1rem;
-  font-size: clamp(1.35rem, 2.85vw + 0.35rem, 2rem);
-  max-width: none;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  margin: 0 0 clamp(0.35rem, 1.2vw, 0.65rem);
+  /* Dark outline + depth + soft orange glow so script stays readable */
+  text-shadow:
+    0 0 1px rgba(15, 36, 68, 0.95),
+    0 1px 0 rgba(15, 36, 68, 0.55),
+    0 2px 5px rgba(15, 36, 68, 0.5),
+    0 0 14px rgba(226, 135, 67, 0.45);
 }
 
 .lede {
-  margin: 0 0 1rem;
-  color: var(--color-muted);
-  max-width: none;
-  font-size: clamp(0.98rem, 1.35vw, 1.08rem);
-  line-height: 1.6;
-  flex: 1 1 auto;
+  margin: 0 0 clamp(0.55rem, 1.5vw, 0.85rem);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 38ch;
+  font-size: clamp(0.8rem, 1vw + 0.55rem, 1rem);
+  line-height: 1.5;
+  text-shadow: 0 1px 3px rgba(15, 36, 68, 0.18);
 }
 
 .actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1rem;
-  margin-top: auto;
-  padding-top: 0.5rem;
+  gap: clamp(0.45rem, 1.2vw, 0.65rem) clamp(0.65rem, 1.5vw, 0.85rem);
 }
 
-@media (max-width: 900px) {
+.actions a.heroCta {
+  box-shadow: 0 4px 14px rgba(15, 36, 68, 0.2);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Carousel indicator dots */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: clamp(0.85rem, 2vw, 1.25rem);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  transition: background 0.3s ease;
+}
+
+.dotActive {
+  background: #fff;
+  border-color: #fff;
+}
+
+/* ---- Desktop wide: two-column copy + art side ---- */
+@media (min-width: 1025px) {
   .inner {
-    grid-template-columns: 1fr;
-    min-height: 0;
-    padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    min-height: clamp(440px, 64vh, 760px);
+  }
+}
+
+/* ---- Tablet ---- */
+@media (min-width: 721px) and (max-width: 1024px) {
+  .inner {
+    min-height: clamp(360px, 56vh, 680px);
+  }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 720px) {
+  .hero {
+    padding: clamp(0.25rem, 1vw, 0.5rem) 0;
   }
 
-  .mediaViewport {
-    min-height: clamp(280px, 44vh, 480px);
+  .inner {
+    min-height: clamp(340px, 58vh, 620px);
+  }
+
+  .copyCol {
+    padding: clamp(0.85rem, 2.5vw, 1.25rem) clamp(0.85rem, 2.5vw, 1.15rem);
+  }
+
+  .headline {
+    font-size: clamp(1.55rem, 7.5vw, 2.3rem);
+  }
+
+  .tagline {
+    font-size: clamp(1.05rem, 4.5vw, 1.45rem);
+  }
+
+  .lede {
+    font-size: clamp(0.76rem, 3vw, 0.88rem);
+    line-height: 1.45;
+    max-width: 32ch;
+  }
+
+  .actions {
+    gap: 0.35rem 0.45rem;
+  }
+
+  /* Higher specificity than Button.module so padding/size actually apply */
+  .actions a.heroCta {
+    padding: 0.38rem 0.65rem;
+    font-size: clamp(0.65rem, 2.2vw, 0.78rem);
+    font-weight: 600;
+    border-width: 1.5px;
+    line-height: 1.25;
+    min-height: 0;
+    box-shadow: 0 3px 10px rgba(15, 36, 68, 0.18);
+  }
+
+  .dots {
+    gap: 0.45rem;
+    margin-top: 0.65rem;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
   }
 }

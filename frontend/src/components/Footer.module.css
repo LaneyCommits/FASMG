@@ -1,71 +1,85 @@
 .footer {
   margin-top: auto;
-  padding: 2.5rem 0 1.5rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem) 0 clamp(1.25rem, 3vw, 1.75rem);
   background: rgba(26, 54, 93, 0.04);
   border-top: 1px solid rgba(26, 54, 93, 0.08);
 }
 
 .inner {
-  width: min(100% - 2rem, var(--max-content));
+  width: min(100% - clamp(1rem, 4vw, 2rem), var(--max-content));
   margin-inline: auto;
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(0.65rem, 2vw, 1.75rem);
+  row-gap: clamp(1rem, 2.2vw, 1.5rem);
   align-items: start;
 }
 
 .brandBlock {
+  grid-column: 1;
+  grid-row: 1;
   min-width: 0;
+  padding-right: clamp(0.45rem, 1.5vw, 1.25rem);
+  border-right: 1px solid rgba(26, 54, 93, 0.1);
 }
 
 .name {
   margin: 0 0 0.35rem;
   font-family: var(--font-serif);
   font-weight: 700;
+  font-size: clamp(0.92rem, 1.8vw, 1.2rem);
   color: var(--color-navy);
+  line-height: 1.25;
 }
 
 .tag {
   margin: 0;
   font-family: var(--font-script);
-  font-size: 1.15rem;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
   color: var(--color-orange);
 }
 
 .contact {
+  grid-column: 2;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-  text-align: center;
+  align-items: flex-start;
+  gap: 0.4rem;
+  text-align: left;
   min-width: 0;
   width: 100%;
+  padding-right: clamp(0.45rem, 1.5vw, 1.25rem);
+  border-right: 1px solid rgba(26, 54, 93, 0.1);
 }
 
 .contactMeta {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
   margin: 0;
-  font-size: 0.92rem;
+  font-size: clamp(0.78rem, 1.4vw, 0.95rem);
   color: var(--color-muted);
+  line-height: 1.4;
 }
 
 .label {
   margin: 0;
   flex-shrink: 0;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-navy);
+  font-weight: 700;
 }
 
 .email {
   display: inline-block;
-  font-size: 0.95rem;
-  word-break: break-all;
+  max-width: 100%;
+  font-size: clamp(0.78rem, 1.4vw, 0.96rem);
+  word-break: break-word;
+  overflow-wrap: anywhere;
   color: var(--color-navy);
   text-decoration: none;
   font-weight: 600;
@@ -83,41 +97,33 @@
 }
 
 .social {
+  grid-column: 3;
+  grid-row: 1;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-width: 0;
 }
 
 .socialLabel {
-  flex: 1 1 100%;
-  text-align: center;
-  font-size: 0.88rem;
+  font-size: clamp(0.78rem, 1.4vw, 0.9rem);
   font-weight: 600;
   color: var(--color-navy);
-}
-
-@media (min-width: 520px) {
-  .socialLabel {
-    flex: 0 1 auto;
-    text-align: left;
-  }
-
-  .social {
-    justify-content: flex-end;
-  }
+  line-height: 1.3;
+  text-align: left;
 }
 
 .socialLink {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: clamp(36px, 8vw, 40px);
+  height: clamp(36px, 8vw, 40px);
   border-radius: 50%;
   background: #fff;
   color: var(--color-navy);
   box-shadow: 0 6px 16px rgba(26, 54, 93, 0.1);
+  flex-shrink: 0;
 }
 
 .socialLink:hover {
@@ -130,31 +136,16 @@
   fill: currentColor;
 }
 
-.secondary {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.88rem;
-}
-
-.secondary a {
-  color: var(--color-navy);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.secondary a:hover {
-  color: var(--color-orange);
-}
-
-.dot {
-  color: rgba(26, 54, 93, 0.35);
-}
-
 .copy {
-  margin: 2rem 0 0;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+  padding-top: clamp(0.65rem, 1.8vw, 1rem);
+  border-top: 1px solid rgba(26, 54, 93, 0.1);
   text-align: center;
-  font-size: 0.82rem;
+  font-size: clamp(0.75rem, 1.3vw, 0.84rem);
   color: var(--color-muted);
+  line-height: 1.45;
+  max-width: 40rem;
+  margin-inline: auto;
 }

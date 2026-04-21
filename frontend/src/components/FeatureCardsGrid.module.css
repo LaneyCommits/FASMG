@@ -1,17 +1,81 @@
+.heading {
+  margin: 0 0 clamp(0.75rem, 2vw, 1.25rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: var(--color-navy);
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.5rem, 1.8vw, 1.25rem);
 }
 
-@media (max-width: 960px) {
-  .grid {
-    grid-template-columns: 1fr;
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  padding: clamp(0.85rem, 2.5vw, 1.5rem) clamp(0.5rem, 1.5vw, 1rem);
+  border-radius: clamp(12px, 2vw, 18px);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(26, 54, 93, 0.08);
+  box-shadow: 0 6px 20px rgba(26, 54, 93, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(26, 54, 93, 0.1);
+}
+
+.iconWrap {
+  display: grid;
+  place-items: center;
+  width: clamp(2.5rem, 7vw, 3.5rem);
+  height: clamp(2.5rem, 7vw, 3.5rem);
+  border-radius: 14px;
+  margin-bottom: clamp(0.45rem, 1.2vw, 0.75rem);
+}
+
+.accentOrange .iconWrap { background: rgba(226, 135, 67, 0.14); }
+.accentBlue .iconWrap { background: rgba(163, 193, 173, 0.25); }
+.accentGold .iconWrap { background: rgba(212, 175, 55, 0.18); }
+.accentNavy .iconWrap { background: rgba(26, 54, 93, 0.12); }
+
+.iconSvg {
+  width: clamp(1.15rem, 3.5vw, 1.6rem);
+  height: clamp(1.15rem, 3.5vw, 1.6rem);
+}
+
+.accentOrange .iconSvg { color: var(--color-orange); }
+.accentBlue .iconSvg { color: var(--color-blue); }
+.accentGold .iconSvg { color: var(--color-gold); }
+.accentNavy .iconSvg { color: var(--color-navy); }
+
+.cardTitle {
+  margin: 0 0 clamp(0.2rem, 0.6vw, 0.35rem);
+  font-size: clamp(0.72rem, 1.6vw + 0.4rem, 1.05rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-navy);
+  white-space: pre-line;
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: clamp(0.6rem, 1.2vw + 0.35rem, 0.82rem);
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 639px) {
+  .card {
+    padding: 0.65rem 0.35rem;
   }
-}
 
-@media (min-width: 640px) and (max-width: 960px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .card:hover {
+    transform: none;
   }
 }
