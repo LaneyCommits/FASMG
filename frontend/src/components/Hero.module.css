@@ -137,10 +137,23 @@
   border-color: rgba(255, 255, 255, 0.45);
 }
 
-/* ---- Desktop wide: two-column copy + art side ---- */
+/* ---- Desktop wide: full-bleed media, copy aligned to content width ---- */
 @media (min-width: 1025px) {
+  .hero {
+    padding: 0 0 clamp(0.15rem, 0.75vw, 0.35rem);
+  }
+
   .inner {
-    min-height: clamp(440px, 64vh, 760px);
+    max-width: none;
+    width: 100%;
+    min-height: clamp(420px, calc(82svh - 5.5rem), 760px);
+  }
+
+  .copyCol {
+    max-width: var(--max-content-wide);
+    width: 100%;
+    margin-inline: auto;
+    box-sizing: border-box;
   }
 }
 

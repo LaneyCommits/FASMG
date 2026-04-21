@@ -76,10 +76,10 @@
 
 .email {
   display: inline-block;
-  max-width: 100%;
-  font-size: clamp(0.78rem, 1.4vw, 0.96rem);
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  font-size: clamp(0.58rem, 0.4rem + 1.85vw, 0.96rem);
+  word-break: normal;
+  overflow-wrap: normal;
   color: var(--color-navy);
   text-decoration: none;
   font-weight: 600;

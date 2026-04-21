@@ -8,3 +8,15 @@
 .stack > :global(section) {
   padding-block: 0 !important;
 }
+
+.stack > :global(section):first-child {
+  padding-top: clamp(1.5rem, 3.5vw, 2.75rem) !important;
+}
+
+/* Match small-screen feel: content uses more horizontal space instead of a narrow centered column. */
+@media (min-width: 1025px) {
+  .stack > :global(section) > :global(div) {
+    width: min(100% - clamp(1rem, 4vw, 3rem), var(--max-content-wide));
+    max-width: none;
+  }
+}

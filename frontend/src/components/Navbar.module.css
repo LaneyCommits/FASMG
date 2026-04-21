@@ -9,13 +9,18 @@
 
 .bar {
   position: relative;
-  width: min(100% - 2rem, var(--max-content));
-  margin-inline: auto;
+  /* Full-bleed bar so brand and nav sit at the viewport edges (inset by padding only). */
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  box-sizing: border-box;
+  padding-left: max(clamp(0.75rem, 2.5vw, 2rem), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(0.75rem, 2.5vw, 2rem), env(safe-area-inset-right, 0px));
+  padding-block: 0.85rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding-block: 0.85rem;
+  justify-content: flex-start;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
 }
 
 .brand {
@@ -25,6 +30,7 @@
   text-decoration: none;
   color: inherit;
   min-width: 0;
+  flex-shrink: 0;
 }
 
 .logoRing {
@@ -68,8 +74,30 @@
   color: var(--color-muted);
 }
 
+.navCluster {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem 1rem;
+  margin-left: auto;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.navPrimary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem 1.15rem;
+}
+
 .menuBtn {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   border: none;
   background: transparent;
   padding: 0.35rem;
@@ -117,14 +145,6 @@
   transform: translateY(-8px) rotate(-45deg);
 }
 
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.25rem 1.15rem;
-}
-
 .link {
   font-size: 0.9rem;
   font-weight: 500;
@@ -146,45 +166,114 @@
   color: var(--color-navy);
 }
 
+/* ---- Desktop: primary row + hamburger dropdown (Events, About, Board, Donate) ---- */
+.menuPanels {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 60;
+  margin-top: 0.35rem;
+  min-width: 12.5rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.menuPanels[data-open='true'] {
+  max-height: 320px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.panelDesktop {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  background: rgba(253, 251, 247, 0.98);
+  border: 1px solid rgba(26, 54, 93, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(26, 54, 93, 0.12);
+}
+
+.panelMobile {
+  display: none;
+}
+
+.menuLink {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  text-decoration: none;
+  padding: 0.55rem 1rem;
+  border-left: 3px solid transparent;
+  transition:
+    color 0.2s ease,
+    background 0.15s ease,
+    border-color 0.2s ease;
+}
+
+.menuLink:hover {
+  color: var(--color-orange);
+  background: rgba(26, 54, 93, 0.04);
+}
+
+.menuLinkActive {
+  color: var(--color-navy);
+  border-left-color: var(--color-orange);
+  background: rgba(226, 135, 67, 0.08);
+}
+
+/* ---- Mobile / tablet: hamburger only, full list in panel ---- */
 @media (max-width: 880px) {
-  .menuBtn {
-    display: block;
+  .navPrimary {
+    display: none;
   }
 
-  .nav {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
+  .panelDesktop {
+    display: none;
+  }
+
+  .panelMobile {
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    padding: 1rem 1.25rem 1.25rem;
+    padding: 0.5rem 0;
     background: rgba(253, 251, 247, 0.98);
     border-bottom: 1px solid rgba(26, 54, 93, 0.08);
-    gap: 0;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition:
-      max-height 0.35s ease,
-      opacity 0.25s ease;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  .nav[data-open='true'] {
-    max-height: 480px;
-    opacity: 1;
-    pointer-events: auto;
+  .menuPanels {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 4.9rem;
+    margin-top: 0;
+    min-width: unset;
+    border-radius: 0;
+    border-top: 1px solid rgba(26, 54, 93, 0.08);
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .menuPanels[data-open='true'] {
+    max-height: min(520px, calc(100vh - 4.9rem));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .link {
-    padding: 0.65rem 0;
+    padding: 0.65rem 1rem;
     border-bottom: 1px solid rgba(26, 54, 93, 0.06);
   }
 
   .active {
     border-bottom-color: rgba(26, 54, 93, 0.06);
     border-left: 3px solid var(--color-orange);
-    padding-left: 0.5rem;
+    padding-left: calc(1rem - 3px);
   }
 }
