@@ -1,0 +1,18 @@
+.page {
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.box {
+  max-width: 52ch;
+}
+
+.title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+}
+
+.lede {
+  margin: 0 0 1.5rem;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}

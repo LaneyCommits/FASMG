@@ -1,0 +1,160 @@
+.footer {
+  margin-top: auto;
+  padding: 2.5rem 0 1.5rem;
+  background: rgba(26, 54, 93, 0.04);
+  border-top: 1px solid rgba(26, 54, 93, 0.08);
+}
+
+.inner {
+  width: min(100% - 2rem, var(--max-content));
+  margin-inline: auto;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: start;
+}
+
+.brandBlock {
+  min-width: 0;
+}
+
+.name {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.tag {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: 1.15rem;
+  color: var(--color-orange);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+  min-width: 0;
+  width: 100%;
+}
+
+.contactMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--color-muted);
+}
+
+.label {
+  margin: 0;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+
+.email {
+  display: inline-block;
+  font-size: 0.95rem;
+  word-break: break-all;
+  color: var(--color-navy);
+  text-decoration: none;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.email:hover {
+  color: var(--color-orange);
+}
+
+.sep {
+  margin: 0;
+  flex-shrink: 0;
+  color: rgba(26, 54, 93, 0.35);
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.socialLabel {
+  flex: 1 1 100%;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+@media (min-width: 520px) {
+  .socialLabel {
+    flex: 0 1 auto;
+    text-align: left;
+  }
+
+  .social {
+    justify-content: flex-end;
+  }
+}
+
+.socialLink {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-navy);
+  box-shadow: 0 6px 16px rgba(26, 54, 93, 0.1);
+}
+
+.socialLink:hover {
+  color: var(--color-orange);
+}
+
+.socialIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.secondary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.88rem;
+}
+
+.secondary a {
+  color: var(--color-navy);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.secondary a:hover {
+  color: var(--color-orange);
+}
+
+.dot {
+  color: rgba(26, 54, 93, 0.35);
+}
+
+.copy {
+  margin: 2rem 0 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}

@@ -1,0 +1,12 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+.section.tight {
+  padding-block: clamp(2rem, 4vw, 3.5rem);
+}
+
+.inner {
+  width: min(100% - 2rem, var(--max-content));
+  margin-inline: auto;
+}

@@ -1,0 +1,51 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(26, 54, 93, 0.12);
+}
+
+.orange .circle {
+  background: linear-gradient(145deg, var(--color-orange), #c96d32);
+}
+
+.blue .circle {
+  background: linear-gradient(145deg, var(--color-blue), #7da58a);
+}
+
+.gold .circle {
+  background: linear-gradient(145deg, var(--color-gold), #b8942c);
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--color-navy);
+  max-width: min(20ch, 100%);
+}

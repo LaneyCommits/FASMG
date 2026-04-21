@@ -1,0 +1,88 @@
+.panel {
+  position: relative;
+  padding: 1.65rem 1.25rem 1.85rem;
+  margin-block: clamp(1rem, 3vw, 2rem);
+  color: #fff;
+  background: linear-gradient(155deg, #1a365d 0%, #0f2444 100%);
+  clip-path: polygon(
+    2% 6%,
+    10% 0%,
+    28% 4%,
+    48% 0%,
+    68% 5%,
+    88% 0%,
+    100% 8%,
+    98% 28%,
+    100% 48%,
+    96% 68%,
+    100% 88%,
+    92% 100%,
+    72% 96%,
+    52% 100%,
+    32% 95%,
+    12% 100%,
+    0% 92%,
+    4% 72%,
+    0% 52%,
+    5% 32%,
+    0% 14%
+  );
+  box-shadow: 0 14px 36px rgba(26, 54, 93, 0.28);
+  text-align: center;
+  max-width: 292px;
+  margin-left: auto;
+}
+
+.logoRing {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 0.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #fff, var(--color-cream));
+  box-shadow:
+    0 0 0 2px var(--color-gold),
+    0 6px 14px rgba(26, 54, 93, 0.15);
+}
+
+.logoImg {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.title {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  color: #fff;
+}
+
+.text {
+  margin: 0 0 0.85rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.cta {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.cta:hover {
+  color: var(--color-gold);
+}
+
+@media (max-width: 768px) {
+  .panel {
+    margin-inline: auto;
+    max-width: none;
+  }
+}

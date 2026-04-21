@@ -1,0 +1,76 @@
+:root {
+  --color-cream: #fdfbf7;
+  --color-navy: #1a365d;
+  --color-orange: #e28743;
+  --color-blue: #a3c1ad;
+  --color-gold: #d4af37;
+  --color-ink: #2d3748;
+  --color-muted: #5a6578;
+  --font-script: 'Caveat', cursive;
+  --font-serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 18px 40px rgba(26, 54, 93, 0.08);
+  --shadow-hover: 0 22px 48px rgba(26, 54, 93, 0.12);
+  --max-content: 1180px;
+  --section-y: clamp(3rem, 6vw, 5.5rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 10% -10%, rgba(163, 193, 173, 0.35), transparent 55%),
+    radial-gradient(ellipse 90% 70% at 95% 5%, rgba(226, 135, 67, 0.18), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(26, 54, 93, 0.06), transparent 45%);
+  background-attachment: fixed;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-navy);
+}
+
+a:hover {
+  color: var(--color-orange);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  color: var(--color-navy);
+  font-weight: 700;
+  line-height: 1.2;
+}

@@ -1,0 +1,159 @@
+.hero {
+  padding: clamp(1rem, 2.5vw, 1.75rem) 0 clamp(0.15rem, 0.75vw, 0.35rem);
+}
+
+.heroNoAnim .inner,
+.heroNoAnim .mediaOverlay,
+.heroNoAnim .copy,
+.heroNoAnim .wash {
+  transition: none !important;
+  animation: none !important;
+}
+
+.heroNoAnim .actions a {
+  transition: none !important;
+}
+
+.heroNoAnim .actions a:hover {
+  transform: none;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-content);
+  margin-inline: auto;
+  min-height: clamp(440px, 64vh, 760px);
+  overflow: hidden;
+  border-radius: 24px;
+  isolation: isolate;
+  display: grid;
+  /* Half hero for copy, half for carousel */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding: clamp(1.25rem, 3vw, 2.25rem) clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.copyCol {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.mediaCol {
+  position: relative;
+  z-index: 0;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.mediaViewport {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: clamp(320px, 50vh, 640px);
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.mediaOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* Light touch so framed “contain” artwork stays readable */
+  background: linear-gradient(
+    100deg,
+    rgba(253, 251, 247, 0.12) 0%,
+    rgba(253, 251, 247, 0.04) 40%,
+    transparent 60%,
+    rgba(26, 54, 93, 0.06) 100%
+  );
+  pointer-events: none;
+}
+
+.copy {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+  max-width: 100%;
+  padding: clamp(0.5rem, 1.5vw, 1rem) 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(226, 135, 67, 0.1), transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(163, 193, 173, 0.22), transparent 50%),
+    linear-gradient(165deg, rgba(255, 255, 255, 0.55), rgba(253, 251, 247, 0.72));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tagline,
+.headline,
+.lede,
+.actions {
+  position: relative;
+  z-index: 1;
+}
+
+.tagline {
+  font-family: var(--font-script);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  color: var(--color-orange);
+  margin: 0 0 0.5rem;
+}
+
+.headline {
+  margin: 0 0 1rem;
+  font-size: clamp(1.35rem, 2.85vw + 0.35rem, 2rem);
+  max-width: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.lede {
+  margin: 0 0 1rem;
+  color: var(--color-muted);
+  max-width: none;
+  font-size: clamp(0.98rem, 1.35vw, 1.08rem);
+  line-height: 1.6;
+  flex: 1 1 auto;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .mediaViewport {
+    min-height: clamp(280px, 44vh, 480px);
+  }
+}

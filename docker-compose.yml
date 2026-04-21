@@ -1,0 +1,23 @@
+# Fine Arts Society of Middle GA — Docker
+#
+# IMPORTANT: Run Compose from THIS folder (the repo root that contains this file).
+# If you run `docker compose up` from another project’s directory, that project’s
+# compose file runs instead.
+#
+# From anywhere (use your actual clone path):
+#   docker compose -f /path/to/FASMG/docker-compose.yml --project-directory /path/to/FASMG up --build
+#
+# Web app (this project): http://localhost:8004/  ← use 8004, not 8000
+
+name: fasmg
+
+services:
+  web:
+    build: .
+    container_name: fasmg
+    ports:
+      - '8004:8000'
+    environment:
+      DJANGO_DEBUG: 'false'
+      DJANGO_ALLOWED_HOSTS: 'localhost,127.0.0.1,0.0.0.0'
+      DJANGO_SECRET_KEY: 'change-me-in-production'

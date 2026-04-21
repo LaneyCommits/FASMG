@@ -1,0 +1,10 @@
+/* Homepage sections: no double-padding from Section, small gap between blocks. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.stack > :global(section) {
+  padding-block: 0 !important;
+}
