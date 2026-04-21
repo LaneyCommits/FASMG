@@ -10,17 +10,13 @@ export default function Hero() {
   const [activeArt, setActiveArt] = useState(
     () => heroBackgroundArt[0] ?? { title: '', artistName: '', imageUrl: '' },
   )
-  const [activeIndex, setActiveIndex] = useState(0)
 
   return (
     <section className={`${styles.hero} ${styles.heroNoAnim}`} aria-labelledby="hero-heading">
       <div className={styles.inner}>
         <div className={styles.mediaCol}>
           <div className={styles.mediaViewport}>
-            <HeroBackgroundCarousel
-              onActivePieceChange={setActiveArt}
-              onIndexChange={setActiveIndex}
-            />
+            <HeroBackgroundCarousel onActivePieceChange={setActiveArt} />
             <div className={styles.mediaOverlay} aria-hidden />
           </div>
         </div>
@@ -43,16 +39,6 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          {heroBackgroundArt.length > 1 && (
-            <div className={styles.dots} aria-hidden>
-              {heroBackgroundArt.map((_, i) => (
-                <span
-                  key={i}
-                  className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
-                />
-              ))}
-            </div>
-          )}
         </div>
         <div className={styles.quoteAnchor}>
           <HeroQuoteCard artistName={activeArt.artistName} title={activeArt.title} />

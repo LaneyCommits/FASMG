@@ -137,28 +137,6 @@
   border-color: rgba(255, 255, 255, 0.45);
 }
 
-/* Carousel indicator dots */
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: clamp(0.85rem, 2vw, 1.25rem);
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1.5px solid rgba(255, 255, 255, 0.65);
-  transition: background 0.3s ease;
-}
-
-.dotActive {
-  background: #fff;
-  border-color: #fff;
-}
-
 /* ---- Desktop wide: two-column copy + art side ---- */
 @media (min-width: 1025px) {
   .inner {
@@ -216,13 +194,4 @@
     box-shadow: 0 3px 10px rgba(15, 36, 68, 0.18);
   }
 
-  .dots {
-    gap: 0.45rem;
-    margin-top: 0.65rem;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-  }
 }

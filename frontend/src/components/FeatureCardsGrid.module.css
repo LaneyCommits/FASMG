@@ -6,18 +6,19 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.5rem, 1.8vw, 1.25rem);
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: stretch;
+  text-align: left;
   text-decoration: none;
   color: inherit;
-  padding: clamp(0.85rem, 2.5vw, 1.5rem) clamp(0.5rem, 1.5vw, 1rem);
+  padding: 0;
+  overflow: hidden;
   border-radius: clamp(12px, 2vw, 18px);
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(26, 54, 93, 0.08);
@@ -30,29 +31,34 @@
   box-shadow: 0 10px 28px rgba(26, 54, 93, 0.1);
 }
 
-.iconWrap {
-  display: grid;
-  place-items: center;
-  width: clamp(2.5rem, 7vw, 3.5rem);
-  height: clamp(2.5rem, 7vw, 3.5rem);
-  border-radius: 14px;
-  margin-bottom: clamp(0.45rem, 1.2vw, 0.75rem);
+.cardImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  flex-shrink: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: rgba(26, 54, 93, 0.06);
 }
 
-.accentOrange .iconWrap { background: rgba(226, 135, 67, 0.14); }
-.accentBlue .iconWrap { background: rgba(163, 193, 173, 0.25); }
-.accentGold .iconWrap { background: rgba(212, 175, 55, 0.18); }
-.accentNavy .iconWrap { background: rgba(26, 54, 93, 0.12); }
-
-.iconSvg {
-  width: clamp(1.15rem, 3.5vw, 1.6rem);
-  height: clamp(1.15rem, 3.5vw, 1.6rem);
+/* Absolute fill so tall/wide source assets never stretch the slot (flex min-height:auto). */
+.cardImg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.accentOrange .iconSvg { color: var(--color-orange); }
-.accentBlue .iconSvg { color: var(--color-blue); }
-.accentGold .iconSvg { color: var(--color-gold); }
-.accentNavy .iconSvg { color: var(--color-navy); }
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: clamp(0.7rem, 2vw, 1rem) clamp(0.75rem, 2vw, 1.1rem) clamp(0.65rem, 1.5vw, 0.85rem);
+}
 
 .cardTitle {
   margin: 0 0 clamp(0.2rem, 0.6vw, 0.35rem);
@@ -70,12 +76,44 @@
   line-height: 1.4;
 }
 
+.cardArrow {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: rgba(26, 54, 93, 0.45);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover .cardArrow {
+  color: var(--color-navy);
+  transform: translateX(2px);
+}
+
+.accentOrange.card:hover .cardArrow {
+  color: var(--color-orange);
+}
+
+.accentBlue.card:hover .cardArrow {
+  color: var(--color-blue);
+}
+
+.accentGold.card:hover .cardArrow {
+  color: var(--color-gold);
+}
+
+.arrowIcon {
+  width: clamp(1.1rem, 3vw, 1.35rem);
+  height: clamp(1.1rem, 3vw, 1.35rem);
+}
+
 @media (max-width: 639px) {
-  .card {
-    padding: 0.65rem 0.35rem;
+  .card:hover {
+    transform: none;
   }
 
-  .card:hover {
+  .card:hover .cardArrow {
     transform: none;
   }
 }
