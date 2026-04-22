@@ -12,10 +12,6 @@ export default function Footer() {
         <div className={styles.contact}>
           <p className={styles.contactMeta}>
             <span className={styles.label}>Contact</span>
-            <span className={styles.sep} aria-hidden>
-              ·
-            </span>
-            <span>Middle Georgia</span>
           </p>
           <a href="mailto:fasmidga@gmail.com" className={styles.email}>
             fasmidga@gmail.com

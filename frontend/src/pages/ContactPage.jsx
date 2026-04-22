@@ -81,8 +81,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <Section className={styles.section}>
-        <div className={styles.formWrap}>
+      <Section className={styles.contactBand} tight>
+        <div className={styles.shell}>
           <form className={styles.form} onSubmit={onSubmit} noValidate>
             <div className={styles.row2}>
               <div className={styles.field}>
@@ -156,7 +156,7 @@ export default function ContactPage() {
                 name="message"
                 className={styles.textarea}
                 required
-                rows={6}
+                rows={5}
                 value={values.message}
                 onChange={onChange}
               />
