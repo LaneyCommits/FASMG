@@ -50,6 +50,7 @@
   border: none;
   border-radius: 0;
   box-shadow: none;
+  overflow: hidden;
 }
 
 .slideImg {
@@ -58,6 +59,22 @@
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
+}
+
+/*
+ * Large screens: slight “zoom out” vs pure cover — scale < 1 shows more context;
+ * slideMat clips and uses a hero-toned fill so edges still read as part of the hero.
+ */
+@media (min-width: 1025px) {
+  .slideMat {
+    background: #0f2444;
+  }
+
+  .slideImg {
+    object-position: center center;
+    transform: scale(0.94);
+    transform-origin: center center;
+  }
 }
 
 .visuallyHidden {
