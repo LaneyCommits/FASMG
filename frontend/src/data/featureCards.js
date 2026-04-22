@@ -32,7 +32,7 @@ export const featureCards = [
     description: 'Join a welcoming circle of artists, educators, and art lovers across Middle Georgia.',
     imageUrl:
       'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80',
-    to: '/join',
+    to: '/membership',
     accent: 'navy',
   },
 ]

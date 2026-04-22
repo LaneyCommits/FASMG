@@ -166,7 +166,7 @@
   color: var(--color-navy);
 }
 
-/* ---- Desktop: primary row + hamburger dropdown (Events, About, Board, Donate) ---- */
+/* ---- Desktop: primary row + hamburger dropdown (About, Board, Donate) ---- */
 .menuPanels {
   position: absolute;
   top: 100%;

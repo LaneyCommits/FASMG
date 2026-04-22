@@ -4,19 +4,31 @@ import styles from './Navbar.module.css'
 
 const primaryLinks = [
   { to: '/', label: 'Home', end: true },
+  { to: '/about', label: 'About' },
   { to: '/gallery', label: 'Gallery' },
   { to: '/classes', label: 'Classes' },
-  { to: '/join', label: 'Join' },
+  { to: '/events', label: 'Events' },
+  { to: '/membership', label: 'Membership' },
 ]
 
 const menuLinks = [
-  { to: '/about', label: 'About' },
   { to: '/boardmembers', label: 'Board Members' },
   { to: '/donate', label: 'Donate' },
-  { to: '/events', label: 'Events' },
+  { to: '/contact', label: 'Contact' },
 ]
 
-const allLinks = [...primaryLinks, ...menuLinks]
+/** Mobile “All pages” menu order (matches primary row + More). */
+const mobileNavLinks = [
+  { to: '/', label: 'Home', end: true },
+  { to: '/about', label: 'About' },
+  { to: '/gallery', label: 'Gallery' },
+  { to: '/classes', label: 'Classes' },
+  { to: '/events', label: 'Events' },
+  { to: '/membership', label: 'Membership' },
+  { to: '/boardmembers', label: 'Board Members' },
+  { to: '/donate', label: 'Donate' },
+  { to: '/contact', label: 'Contact' },
+]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -93,7 +105,7 @@ export default function Navbar() {
               ))}
             </nav>
             <nav className={styles.panelMobile} aria-label="All pages">
-              {allLinks.map(({ to, label, end }) => (
+              {mobileNavLinks.map(({ to, label, end }) => (
                 <NavLink
                   key={to}
                   to={to}

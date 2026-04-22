@@ -8,6 +8,7 @@ import AboutPage from './pages/AboutPage'
 import BoardMembersPage from './pages/BoardMembersPage'
 import JoinPage from './pages/JoinPage'
 import DonatePage from './pages/DonatePage'
+import ContactPage from './pages/ContactPage'
 
 export default function App() {
   return (
@@ -19,8 +20,9 @@ export default function App() {
         <Route path="/classes" element={<ClassesPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/boardmembers" element={<BoardMembersPage />} />
-        <Route path="/join" element={<JoinPage />} />
+        <Route path="/membership" element={<JoinPage />} />
         <Route path="/donate" element={<DonatePage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Route>
     </Routes>
   )

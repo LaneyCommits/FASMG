@@ -1,16 +1,23 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { ArrowDownTrayIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Section from '../components/Section'
+import ArtSupplySwapShopModal from '../components/ArtSupplySwapShopModal'
+import RigbyFineArtExhibitModal from '../components/RigbyFineArtExhibitModal'
+import RigbysSpringMarketModal from '../components/RigbysSpringMarketModal'
 import events from '../data/events.json'
+import { isArtSupplySwapShopEvent } from '../data/artSupplySwapShop'
+import { isRigbysFineArtExhibitEvent } from '../data/rigbysFineArtExhibit'
+import { isRigbysSpringMarketEvent } from '../data/rigbysSpringMarket'
 import { formatEventDate } from '../utils/getUpcomingEvents'
 import styles from './EventsPage.module.css'
 
 const CALENDAR_PDF = `${import.meta.env.BASE_URL}fasmgcalendar.pdf`
+const MEETING_REMINDER_IMG = `${import.meta.env.BASE_URL}img/meeting-reminder.png`
 
 const FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'meeting', label: 'Meetings' },
-  { id: 'event', label: 'Exhibits & events' },
+  { id: 'event', label: 'Events' },
   { id: 'deadline', label: 'Deadlines' },
   { id: 'holiday', label: 'Holidays' },
 ]
@@ -53,6 +60,12 @@ function compareMonth(a, b) {
 export default function EventsPage() {
   const [filter, setFilter] = useState('all')
   const [cursor, setCursor] = useState(() => firstEventMonth(events))
+  const [rigbyModalOpen, setRigbyModalOpen] = useState(false)
+  const closeRigbyModal = useCallback(() => setRigbyModalOpen(false), [])
+  const [swapShopModalOpen, setSwapShopModalOpen] = useState(false)
+  const closeSwapShopModal = useCallback(() => setSwapShopModalOpen(false), [])
+  const [springMarketModalOpen, setSpringMarketModalOpen] = useState(false)
+  const closeSpringMarketModal = useCallback(() => setSpringMarketModalOpen(false), [])
 
   const filteredEvents = useMemo(
     () => (filter === 'all' ? events : events.filter((e) => e.type === filter)),
@@ -93,23 +106,38 @@ export default function EventsPage() {
   const canNext = monthBounds && compareMonth(cursor, monthBounds.max) < 0
 
   return (
+    <>
     <Section className={styles.page}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>Events</h1>
-        <p className={styles.lede}>
-          Meetings, exhibits, markets, and important dates for the Fine Arts Society of Middle Georgia.
-        </p>
-        <a
-          href={CALENDAR_PDF}
-          download="fasmg-calendar.pdf"
-          className={styles.calendarDownload}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <ArrowDownTrayIcon className={styles.calendarDownloadIcon} aria-hidden />
-          Download calendar (PDF)
-        </a>
-      </header>
+      <div className={styles.pageShell}>
+        <div className={styles.pageTop}>
+          <div className={styles.pageTopMain}>
+            <header className={styles.header}>
+              <h1 className={styles.title}>Events</h1>
+              <p className={styles.lede}>
+                Meetings, exhibits, markets, and important dates for the Fine Arts Society of Middle Georgia.
+              </p>
+              <a
+                href={CALENDAR_PDF}
+                download="fasmg-calendar.pdf"
+                className={styles.calendarDownload}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <ArrowDownTrayIcon className={styles.calendarDownloadIcon} aria-hidden />
+                Download calendar (PDF)
+              </a>
+            </header>
+          </div>
+          <img
+            src={MEETING_REMINDER_IMG}
+            alt=""
+            className={styles.meetingReminder}
+            width={200}
+            height={200}
+            decoding="async"
+            aria-hidden
+          />
+        </div>
 
       <div className={styles.filters} role="group" aria-label="Filter events by type">
         {FILTERS.map((f) => (
@@ -161,11 +189,40 @@ export default function EventsPage() {
                 <li key={ev.id} className={styles.eventCard}>
                   <div className={styles.eventTop}>
                     <h3 className={styles.eventTitle}>{ev.title}</h3>
-                    <span
-                      className={[styles.typePill, styles[`type_${ev.type}`]].filter(Boolean).join(' ')}
-                    >
-                      {typeLabel(ev.type)}
-                    </span>
+                    <div className={styles.eventTopAside}>
+                      {isRigbysFineArtExhibitEvent(ev.title) && (
+                        <button
+                          type="button"
+                          className={styles.learnMore}
+                          onClick={() => setRigbyModalOpen(true)}
+                        >
+                          Learn more
+                        </button>
+                      )}
+                      {isArtSupplySwapShopEvent(ev.title) && (
+                        <button
+                          type="button"
+                          className={styles.learnMore}
+                          onClick={() => setSwapShopModalOpen(true)}
+                        >
+                          Learn more
+                        </button>
+                      )}
+                      {isRigbysSpringMarketEvent(ev.title) && (
+                        <button
+                          type="button"
+                          className={styles.learnMore}
+                          onClick={() => setSpringMarketModalOpen(true)}
+                        >
+                          Learn more
+                        </button>
+                      )}
+                      <span
+                        className={[styles.typePill, styles[`type_${ev.type}`]].filter(Boolean).join(' ')}
+                      >
+                        {typeLabel(ev.type)}
+                      </span>
+                    </div>
                   </div>
                   <p className={styles.meta}>
                     <strong>{formatEventDate(ev.date)}</strong>
@@ -179,6 +236,11 @@ export default function EventsPage() {
           )}
         </section>
       )}
+      </div>
     </Section>
+    <RigbyFineArtExhibitModal open={rigbyModalOpen} onClose={closeRigbyModal} />
+    <ArtSupplySwapShopModal open={swapShopModalOpen} onClose={closeSwapShopModal} />
+    <RigbysSpringMarketModal open={springMarketModalOpen} onClose={closeSpringMarketModal} />
+    </>
   )
 }

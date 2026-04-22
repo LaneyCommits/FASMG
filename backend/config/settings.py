@@ -144,3 +144,25 @@ WHITENOISE_USE_FINDERS = DEBUG
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email (contact form). Set DJANGO_EMAIL_HOST (+ user/password) in production to send via SMTP;
+# without it, mail is printed to the console (see runserver output).
+CONTACT_TO_EMAIL = os.environ.get("DJANGO_CONTACT_TO_EMAIL", "fasmidga@gmail.com")
+DEFAULT_FROM_EMAIL = os.environ.get(
+    "DJANGO_DEFAULT_FROM_EMAIL",
+    "Fine Arts Society of Middle GA <noreply@localhost>",
+)
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+if os.environ.get("DJANGO_EMAIL_HOST"):
+    EMAIL_BACKEND = os.environ.get(
+        "DJANGO_EMAIL_BACKEND",
+        "django.core.mail.backends.smtp.EmailBackend",
+    )
+    EMAIL_HOST = os.environ["DJANGO_EMAIL_HOST"]
+    EMAIL_PORT = int(os.environ.get("DJANGO_EMAIL_PORT", "587"))
+    EMAIL_HOST_USER = os.environ.get("DJANGO_EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = os.environ.get("DJANGO_EMAIL_HOST_PASSWORD", "")
+    EMAIL_USE_TLS = os.environ.get("DJANGO_EMAIL_USE_TLS", "true").lower() in ("1", "true", "yes")
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

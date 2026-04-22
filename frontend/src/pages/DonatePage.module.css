@@ -1,0 +1,961 @@
+/* =============================================
+   Donate page
+   ============================================= */
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  text-align: center;
+  padding-block: clamp(2.25rem, 5.5vw, 4.5rem);
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+  background-color: var(--color-navy);
+  background-image:
+    linear-gradient(
+      155deg,
+      rgba(26, 54, 93, 0.9) 0%,
+      rgba(26, 54, 93, 0.8) 42%,
+      rgba(26, 54, 93, 0.72) 68%,
+      rgba(212, 175, 55, 0.22) 100%
+    ),
+    radial-gradient(ellipse 95% 80% at 50% 18%, rgba(15, 36, 68, 0.55) 0%, transparent 58%),
+    linear-gradient(180deg, rgba(15, 36, 68, 0.35) 0%, transparent 42%),
+    var(--donate-hero-image, none);
+  background-size: auto, auto, auto, cover;
+  background-position: center, center, center, center 38%;
+  background-repeat: no-repeat;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  mix-blend-mode: soft-light;
+  background:
+    radial-gradient(ellipse 70% 55% at 12% 88%, rgba(226, 135, 67, 0.5), transparent 52%),
+    radial-gradient(ellipse 60% 50% at 92% 12%, rgba(212, 175, 55, 0.45), transparent 48%);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-content);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroIcon {
+  width: clamp(2.25rem, 5vw, 3rem);
+  height: clamp(2.25rem, 5vw, 3rem);
+  color: var(--color-gold);
+  margin-bottom: clamp(0.5rem, 1.5vw, 0.85rem);
+  filter: drop-shadow(0 2px 10px rgba(15, 36, 68, 0.45));
+}
+
+.heroTitle {
+  margin: 0 0 clamp(0.5rem, 1.5vw, 0.85rem);
+  font-size: clamp(1.6rem, 4.2vw + 0.5rem, 2.6rem);
+  color: #fff;
+  line-height: 1.12;
+  text-wrap: balance;
+  max-width: 100%;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    0 10px 28px rgba(0, 0, 0, 0.25);
+}
+
+.heroLede {
+  margin: 0 0 0.65rem;
+  font-size: clamp(0.88rem, 1.3vw + 0.4rem, 1.05rem);
+  line-height: 1.62;
+  max-width: min(60ch, 100%);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 8px rgba(15, 36, 68, 0.45);
+}
+
+.heroSub {
+  margin: 0;
+  font-size: clamp(0.82rem, 1.1vw + 0.38rem, 0.92rem);
+  line-height: 1.55;
+  max-width: min(60ch, 100%);
+  color: rgba(255, 255, 255, 0.78);
+  font-style: italic;
+  text-shadow: 0 1px 6px rgba(15, 36, 68, 0.4);
+}
+
+/* ---- Sections ---- */
+.section {
+  padding-block: clamp(1.35rem, 3.5vw, 3rem);
+  padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+}
+
+.sectionTitle {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.3rem, 2.8vw, 1.75rem);
+  color: var(--color-navy);
+}
+
+.sectionLede {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  max-width: 52ch;
+}
+
+/* ---- Donate intro row ---- */
+.donateIntro {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.65rem, 2vw, 0.85rem);
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.donateIntroIcon {
+  width: clamp(1.6rem, 3vw, 2rem);
+  height: clamp(1.6rem, 3vw, 2rem);
+  flex-shrink: 0;
+  color: var(--color-gold);
+  margin-top: 0.15rem;
+}
+
+/* ---- Donation cards ---- */
+.donateGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.donateGrid > * {
+  min-width: 0;
+}
+
+.donateCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: clamp(1.15rem, 2.5vw, 1.75rem);
+  border-radius: clamp(14px, 2.5vw, 22px);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(26, 54, 93, 0.08);
+  border-top: 3px solid var(--color-gold);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 6px 20px rgba(26, 54, 93, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .donateCard:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95) inset,
+      0 10px 28px rgba(26, 54, 93, 0.1);
+  }
+}
+
+.donateCardMonthly {
+  border-top-color: var(--color-orange);
+}
+
+.donateCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(0.35rem, 1vw, 0.65rem);
+}
+
+.donateCardIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+  color: var(--color-gold);
+}
+
+.donateCardMonthly .donateCardIcon {
+  color: var(--color-orange);
+}
+
+.donateCardTitle {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--color-navy);
+  font-weight: 700;
+}
+
+.donateCardDesc {
+  margin: 0 0 clamp(0.65rem, 1.5vw, 1rem);
+  font-size: 0.86rem;
+  color: var(--color-muted);
+  line-height: 1.45;
+}
+
+/* Amount chips */
+.amountGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: clamp(0.65rem, 1.5vw, 1rem);
+}
+
+.amountChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.2rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1.5px solid rgba(212, 175, 55, 0.3);
+  border-radius: 10px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.amountChip:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* Monthly highlight */
+.monthlyHighlight {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  margin-bottom: clamp(0.65rem, 1.5vw, 1rem);
+}
+
+.monthlyAmount {
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--color-navy);
+  line-height: 1;
+  font-family: var(--font-serif);
+}
+
+.monthlyUnit {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.donateNotice {
+  margin: auto 0 0;
+  padding: clamp(0.55rem, 1.4vw, 0.7rem) clamp(0.65rem, 1.5vw, 0.85rem);
+  border-radius: 10px;
+  background: rgba(26, 54, 93, 0.045);
+  border: 1px solid rgba(26, 54, 93, 0.07);
+  border-left: 3px solid rgba(226, 135, 67, 0.65);
+  font-size: 0.76rem;
+  color: var(--color-muted);
+  line-height: 1.45;
+  text-align: left;
+}
+
+/* ---- Sponsorship ---- */
+.sponsorBlock {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.sponsorBlock > * {
+  min-width: 0;
+}
+
+.sponsorText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.sponsorCta {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-orange);
+  line-height: 1.4;
+}
+
+.sponsorImageWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sponsorImagePlaceholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: clamp(12px, 2vw, 18px);
+  background: rgba(26, 54, 93, 0.04);
+  border: 2px dashed rgba(26, 54, 93, 0.12);
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.sponsorPlaceholderIcon {
+  width: 2rem;
+  height: 2rem;
+  color: rgba(26, 54, 93, 0.2);
+}
+
+/* ---- Thanks bar + mosaic: two columns at all breakpoints ---- */
+.sponsorSpotlightRow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(0.3rem, 1.8vw, 0.85rem);
+  align-items: stretch;
+  width: min(100% - 2rem, var(--max-content));
+  max-width: var(--max-content);
+  margin-inline: auto;
+  min-width: 0;
+}
+
+.sponsorSpotlightRow > * {
+  min-width: 0;
+  min-height: 0;
+}
+
+.sponsorSpotlightRow .thanksBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: none;
+  border-right: 1px solid rgba(212, 175, 55, 0.28);
+  padding-block: clamp(0.55rem, 2vw, 1.1rem);
+  padding-inline: clamp(0.35rem, 1.5vw, 0.65rem) clamp(0.35rem, 1.8vw, 0.75rem);
+}
+
+.sponsorSpotlightRow .mosaicSection {
+  display: flex;
+  flex-direction: column;
+  border-top: none;
+  padding-block: clamp(0.55rem, 2vw, 1.1rem);
+  padding-inline: clamp(0.25rem, 1.2vw, 0.5rem) clamp(0.35rem, 1.8vw, 0.75rem);
+  container-type: inline-size;
+  container-name: sponsor-mosaic;
+}
+
+.sponsorSpotlightRow .thanksInner {
+  max-width: none;
+  width: 100%;
+  margin-inline: 0;
+  gap: clamp(0.35rem, 1.5vw, 0.55rem);
+  flex-shrink: 0;
+}
+
+.sponsorSpotlightRow .thanksIcon {
+  width: clamp(1.15rem, 3vw, 1.45rem);
+  height: clamp(1.15rem, 3vw, 1.45rem);
+}
+
+.sponsorSpotlightRow .thanksText {
+  font-size: clamp(0.68rem, 1.8vw + 0.15rem, 1.1rem);
+  max-width: none;
+}
+
+.sponsorSpotlightRow .sponsorList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.22rem;
+  width: 100%;
+}
+
+.sponsorSpotlightRow .sponsorName {
+  padding: 0.22rem 0.4rem;
+  font-size: clamp(0.55rem, 1.35vw + 0.12rem, 0.74rem);
+  line-height: 1.25;
+  text-align: center;
+}
+
+.sponsorSpotlightRow .mosaicInner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  align-items: stretch;
+  gap: clamp(0.35rem, 1.8vw, 0.55rem);
+  min-height: 0;
+}
+
+.sponsorSpotlightRow .mosaicHeader {
+  flex-shrink: 0;
+  max-width: none;
+  margin-bottom: 0.25rem;
+  padding-inline: 0;
+  text-align: center;
+}
+
+.sponsorSpotlightRow .mosaicEyebrow {
+  font-size: clamp(0.65rem, 1.8vw, 0.82rem);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.12rem;
+}
+
+.sponsorSpotlightRow .mosaicTitle {
+  font-size: clamp(0.72rem, 1.9vw + 0.12rem, 1.05rem);
+  margin-bottom: 0.2rem;
+}
+
+/* Compact bento + no tilt (tilt caused overlap / odd offsets in the split layout) */
+.sponsorSpotlightRow .mosaicFrame,
+.sponsorSpotlightRow .mosaic_tall,
+.sponsorSpotlightRow .mosaic_square,
+.sponsorSpotlightRow .mosaic_wide {
+  min-height: 0;
+  transform: none;
+}
+
+.sponsorSpotlightRow .mosaicFrame:hover {
+  transform: none;
+  z-index: auto;
+}
+
+.sponsorSpotlightRow .mosaicFrame:hover .mosaicImgShell {
+  transform: none;
+}
+
+.sponsorSpotlightRow .mosaicGrid {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.35rem, 1.5vw, 0.55rem);
+  align-content: stretch;
+}
+
+.sponsorSpotlightRow .mosaicImgShell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(0.2rem, 1.2vw, 0.45rem);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 1px 2px rgba(26, 54, 93, 0.05),
+    0 3px 8px rgba(26, 54, 93, 0.06);
+}
+
+.sponsorSpotlightRow .mosaicImg {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.sponsorSpotlightRow .mosaic_tall .mosaicImgShell,
+.sponsorSpotlightRow .mosaic_square .mosaicImgShell,
+.sponsorSpotlightRow .mosaic_wide .mosaicImgShell {
+  aspect-ratio: unset;
+  max-height: none;
+}
+
+@container sponsor-mosaic (max-width: 260px) {
+  .sponsorSpotlightRow .mosaicGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: minmax(56px, 1fr);
+  }
+
+  .sponsorSpotlightRow .mosaic_tall,
+  .sponsorSpotlightRow .mosaic_square,
+  .sponsorSpotlightRow .mosaic_wide {
+    grid-row: auto;
+    grid-column: auto;
+  }
+}
+
+/* ---- Thanks bar ---- */
+.thanksBar {
+  background: rgba(212, 175, 55, 0.08);
+  border-top: 1px solid rgba(212, 175, 55, 0.18);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+  padding-block: clamp(1.1rem, 2.8vw, 1.55rem);
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+}
+
+.thanksInner {
+  max-width: var(--max-content);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.thanksIcon {
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--color-gold);
+}
+
+.thanksText {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.5vw + 0.2rem, 1.35rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  font-family: var(--font-serif);
+  text-wrap: balance;
+  text-align: center;
+  max-width: min(28ch, 100%);
+}
+
+.sponsorList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 0.55rem;
+}
+
+.sponsorName {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 999px;
+}
+
+/* ---- Sponsor artwork mosaic (page bottom) ---- */
+.mosaicSection {
+  padding-block: clamp(1.75rem, 4vw, 2.75rem) clamp(2rem, 5vw, 3.25rem);
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+  background:
+    radial-gradient(ellipse 90% 70% at 50% -20%, rgba(212, 175, 55, 0.14), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 100% 100%, rgba(26, 54, 93, 0.06), transparent 45%),
+    linear-gradient(180deg, rgba(26, 54, 93, 0.035) 0%, rgba(26, 54, 93, 0.09) 100%);
+  border-top: 1px solid rgba(26, 54, 93, 0.06);
+}
+
+.mosaicInner {
+  width: min(100%, var(--max-content));
+  max-width: var(--max-content);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.mosaicHeader {
+  width: 100%;
+  max-width: 36rem;
+  text-align: center;
+  margin-bottom: clamp(0.85rem, 2.5vw, 1.35rem);
+  padding-inline: clamp(0, 2vw, 0.5rem);
+}
+
+.mosaicEyebrow {
+  display: block;
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  color: var(--color-gold);
+  margin-bottom: 0.25rem;
+  letter-spacing: clamp(0.14em, 1.8vw, 0.35em);
+}
+
+.mosaicTitle {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.15rem, 2.5vw + 0.35rem, 1.65rem);
+  color: var(--color-navy);
+  font-family: var(--font-serif);
+  text-wrap: balance;
+  line-height: 1.12;
+}
+
+.mosaicGrid {
+  display: grid;
+  width: 100%;
+  max-width: min(100%, 36rem);
+  min-width: 0;
+  margin-inline: auto;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.88fr);
+  grid-template-rows: repeat(2, minmax(0, clamp(96px, 18vw, 150px)));
+  gap: clamp(0.55rem, 2vw, 0.85rem);
+  align-items: stretch;
+}
+
+.mosaicFrame {
+  margin: 0;
+  position: relative;
+  border-radius: clamp(10px, 1.8vw, 16px);
+  isolation: isolate;
+}
+
+.mosaic_tall {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+
+.mosaic_square {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.mosaic_wide {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.mosaicImgShell {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  border-radius: clamp(8px, 1.5vw, 14px);
+  overflow: hidden;
+  border: 1px solid rgba(26, 54, 93, 0.1);
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
+    linear-gradient(var(--color-cream), var(--color-cream)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.65) 0%,
+      rgba(226, 135, 67, 0.4) 50%,
+      rgba(163, 193, 173, 0.5) 100%
+    )
+    border-box;
+  background-color: var(--color-cream);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 1px 2px rgba(26, 54, 93, 0.06),
+    0 6px 16px rgba(26, 54, 93, 0.08),
+    0 14px 36px rgba(15, 36, 68, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mosaic_tall .mosaicImgShell {
+  min-height: 0;
+}
+
+.mosaic_square .mosaicImgShell {
+  aspect-ratio: 1;
+  min-height: 0;
+}
+
+.mosaic_wide .mosaicImgShell {
+  aspect-ratio: 16 / 10;
+  min-height: 0;
+}
+
+.mosaicFrame:hover .mosaicImgShell {
+  transform: scale(1.015);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 2px 4px rgba(26, 54, 93, 0.07),
+    0 10px 22px rgba(26, 54, 93, 0.1),
+    0 22px 48px rgba(15, 36, 68, 0.14);
+}
+
+.mosaicImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Slight “gallery wall” tilt on wide screens */
+@media (prefers-reduced-motion: reduce) {
+  .donateCard,
+  .mosaicImgShell {
+    transition: none;
+  }
+
+  .donateCard:hover {
+    transform: none;
+  }
+
+  .mosaicFrame:hover .mosaicImgShell {
+    transform: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .mosaicGrid {
+    max-width: min(100%, 38rem);
+    grid-template-rows: repeat(2, minmax(0, clamp(108px, 16vw, 158px)));
+  }
+
+  .mosaic_tall {
+    transform: rotate(-0.45deg);
+  }
+
+  .mosaic_square {
+    transform: rotate(0.5deg);
+  }
+
+  .mosaic_wide {
+    transform: rotate(-0.25deg);
+  }
+
+  .mosaicFrame:hover {
+    transform: none;
+    z-index: 2;
+  }
+
+  .mosaicFrame:hover .mosaicImgShell {
+    transform: scale(1.02) rotate(0deg);
+  }
+}
+
+.sponsorSpotlightRow .mosaic_tall,
+.sponsorSpotlightRow .mosaic_square,
+.sponsorSpotlightRow .mosaic_wide {
+  transform: none !important;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .donateGrid {
+    gap: clamp(0.38rem, 2vw, 0.7rem);
+  }
+
+  .donateCard {
+    padding: clamp(0.55rem, 2.8vw, 1rem) clamp(0.38rem, 2.2vw, 0.7rem);
+    border-radius: clamp(10px, 2vw, 18px);
+  }
+
+  .donateCardHeader {
+    flex-wrap: wrap;
+    gap: 0.32rem 0.4rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .donateCardIcon {
+    width: clamp(0.95rem, 2.5vw, 1.2rem);
+    height: clamp(0.95rem, 2.5vw, 1.2rem);
+  }
+
+  .donateCardTitle {
+    font-size: clamp(0.72rem, 1.6vw + 0.28rem, 1.05rem);
+    line-height: 1.2;
+  }
+
+  .donateCardDesc {
+    margin-bottom: clamp(0.4rem, 1.5vw, 0.65rem);
+    font-size: clamp(0.65rem, 1.1vw + 0.22rem, 0.82rem);
+    line-height: 1.35;
+  }
+
+  .amountGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+    margin-bottom: clamp(0.4rem, 1.5vw, 0.65rem);
+  }
+
+  .amountChip {
+    min-width: 0;
+    width: 100%;
+    padding: clamp(0.28rem, 1.5vw, 0.4rem) clamp(0.25rem, 1.2vw, 0.45rem);
+    font-size: clamp(0.62rem, 1.2vw + 0.2rem, 0.8rem);
+    border-radius: 8px;
+  }
+
+  .monthlyHighlight {
+    margin-bottom: clamp(0.4rem, 1.5vw, 0.65rem);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .monthlyAmount {
+    font-size: clamp(1.1rem, 3.5vw + 0.2rem, 1.75rem);
+  }
+
+  .monthlyUnit {
+    font-size: clamp(0.58rem, 1vw + 0.15rem, 0.74rem);
+  }
+
+  .donateNotice {
+    padding: clamp(0.38rem, 1.4vw, 0.52rem) clamp(0.4rem, 1.5vw, 0.55rem);
+    font-size: clamp(0.52rem, 0.9vw + 0.18rem, 0.68rem);
+    line-height: 1.32;
+  }
+
+  .sponsorBlock {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(0.45rem, 2.5vw, 1rem);
+    align-items: start;
+  }
+
+  .sponsorText {
+    gap: 0.35rem;
+  }
+
+  .sponsorText .sectionTitle {
+    font-size: clamp(0.92rem, 1.8vw + 0.35rem, 1.45rem);
+    line-height: 1.15;
+    margin-bottom: 0.15rem;
+  }
+
+  .sponsorText .sectionLede {
+    font-size: clamp(0.68rem, 1.1vw + 0.22rem, 0.9rem);
+    line-height: 1.42;
+    max-width: none;
+  }
+
+  .sponsorCta {
+    margin-top: 0.35rem;
+    font-size: clamp(0.68rem, 1.2vw + 0.22rem, 0.88rem);
+    line-height: 1.35;
+  }
+
+  .sponsorImageWrap {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .sponsorImagePlaceholder {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    padding: clamp(0.5rem, 2.5vw, 0.9rem);
+    gap: 0.4rem;
+    font-size: clamp(0.6rem, 1.1vw + 0.18rem, 0.78rem);
+    border-radius: clamp(10px, 1.8vw, 16px);
+  }
+
+  .sponsorPlaceholderIcon {
+    width: clamp(1.35rem, 3vw, 1.75rem);
+    height: clamp(1.35rem, 3vw, 1.75rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .heroIcon {
+    margin-bottom: 0.45rem;
+  }
+
+  .heroLede {
+    font-size: clamp(0.86rem, 2.8vw + 0.35rem, 0.98rem);
+    line-height: 1.58;
+  }
+
+  .heroSub {
+    font-size: clamp(0.78rem, 2.2vw + 0.32rem, 0.88rem);
+  }
+
+  .sponsorBlock {
+    gap: clamp(0.32rem, 2vw, 0.6rem);
+  }
+
+  .sponsorText .sectionTitle {
+    font-size: clamp(0.82rem, 2.2vw + 0.28rem, 1.2rem);
+  }
+
+  .sponsorText .sectionLede {
+    font-size: clamp(0.64rem, 1.8vw + 0.2rem, 0.84rem);
+  }
+
+  .donateIntro {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .donateIntroIcon {
+    margin-top: 0;
+    width: clamp(1.75rem, 8vw, 2rem);
+    height: clamp(1.75rem, 8vw, 2rem);
+  }
+
+  .donateIntro .sectionTitle {
+    margin-inline: auto;
+  }
+
+  .donateIntro .sectionLede {
+    max-width: 36ch;
+    margin-inline: auto;
+    font-size: 0.89rem;
+  }
+
+  .amountGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    justify-content: stretch;
+  }
+
+  .amountChip {
+    min-width: 0;
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.84rem;
+  }
+
+  .monthlyHighlight {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .sponsorCta {
+    padding: clamp(0.42rem, 2vw, 0.58rem) clamp(0.45rem, 2.2vw, 0.72rem);
+    margin-top: 0.35rem;
+    border-radius: 10px;
+    background: rgba(226, 135, 67, 0.1);
+    border: 1px solid rgba(226, 135, 67, 0.22);
+    text-align: center;
+    font-size: clamp(0.62rem, 1.35vw + 0.2rem, 0.82rem);
+    line-height: 1.35;
+  }
+
+  .thanksInner {
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+
+  .thanksText {
+    max-width: none;
+  }
+
+  .sponsorList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.38rem 0.45rem;
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .sponsorName {
+    padding: 0.42rem 0.5rem;
+    font-size: 0.78rem;
+    text-align: center;
+    line-height: 1.3;
+  }
+}

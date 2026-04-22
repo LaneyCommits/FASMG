@@ -1,0 +1,196 @@
+/* ---- Hero (artclass.jpg — palette right; scrim favors left copy) ---- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: clamp(210px, 36vw, 340px);
+  padding-block: clamp(2.25rem, 6vw, 4rem);
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+  background-color: #0f2444;
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(15, 36, 68, 0.9) 0%,
+      rgba(15, 36, 68, 0.58) 40%,
+      rgba(15, 36, 68, 0.22) 62%,
+      rgba(15, 36, 68, 0.08) 100%
+    ),
+    linear-gradient(180deg, rgba(15, 36, 68, 0.4) 0%, transparent 48%),
+    var(--classes-hero-bg, none);
+  background-size: auto, auto, cover;
+  background-position: center, center, center;
+  background-repeat: no-repeat;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, var(--max-content));
+  margin-inline: auto;
+}
+
+.heroTitle {
+  margin: 0 0 clamp(0.45rem, 1.5vw, 0.75rem);
+  font-size: clamp(1.75rem, 3.8vw + 0.35rem, 2.45rem);
+  color: #fff;
+  line-height: 1.08;
+  text-wrap: balance;
+  max-width: 18ch;
+  text-shadow: 0 2px 14px rgba(15, 36, 68, 0.5);
+}
+
+.heroLede {
+  margin: 0;
+  max-width: min(40ch, 100%);
+  font-size: clamp(0.9rem, 1.2vw + 0.42rem, 1.06rem);
+  font-weight: 600;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 1px 8px rgba(15, 36, 68, 0.45);
+}
+
+.heroSubLede {
+  margin: 0.45rem 0 0;
+  max-width: min(42ch, 100%);
+  font-size: clamp(0.82rem, 1vw + 0.35rem, 0.95rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 6px rgba(15, 36, 68, 0.4);
+}
+
+.page {
+  padding-block: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+/* ---- Card grid ---- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: clamp(12px, 2vw, 18px);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(26, 54, 93, 0.08);
+  box-shadow: 0 6px 20px rgba(26, 54, 93, 0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 28px rgba(26, 54, 93, 0.1);
+}
+
+/* Accent top borders */
+.accent_orange {
+  border-top: 3px solid var(--color-orange);
+}
+
+.accent_blue {
+  border-top: 3px solid var(--color-blue);
+}
+
+/* ---- Card header ---- */
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+  margin-bottom: clamp(0.65rem, 1.5vw, 1rem);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  flex: 1 1 12rem;
+}
+
+.instructorPill {
+  flex-shrink: 0;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  background: rgba(26, 54, 93, 0.08);
+  color: var(--color-navy);
+}
+
+/* ---- Detail rows ---- */
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: clamp(0.75rem, 1.8vw, 1.1rem);
+}
+
+.detailRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  color: var(--color-ink);
+  line-height: 1.45;
+}
+
+.detailIcon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  color: var(--color-muted);
+  margin-top: 0.1rem;
+}
+
+/* ---- Contact block ---- */
+.contact {
+  margin-top: auto;
+  padding-top: clamp(0.55rem, 1.2vw, 0.75rem);
+  border-top: 1px solid rgba(26, 54, 93, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.contactLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-bottom: 0.1rem;
+}
+
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contactLink:hover {
+  color: var(--color-orange);
+}
+
+.contactIcon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 639px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

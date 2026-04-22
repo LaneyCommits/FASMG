@@ -149,3 +149,10 @@
   max-width: 40rem;
   margin-inline: auto;
 }
+
+@media (max-width: 640px) {
+  .email {
+    font-size: clamp(0.52rem, 0.3rem + 1.2vw, 0.76rem);
+    line-height: 1.3;
+  }
+}

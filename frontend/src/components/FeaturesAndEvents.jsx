@@ -1,7 +1,13 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
+import ArtSupplySwapShopModal from './ArtSupplySwapShopModal'
+import RigbyFineArtExhibitModal from './RigbyFineArtExhibitModal'
+import RigbysSpringMarketModal from './RigbysSpringMarketModal'
 import events from '../data/events.json'
+import { isArtSupplySwapShopEvent } from '../data/artSupplySwapShop'
+import { isRigbysFineArtExhibitEvent } from '../data/rigbysFineArtExhibit'
+import { isRigbysSpringMarketEvent } from '../data/rigbysSpringMarket'
 import { getUpcomingEvents, formatEventBadgeParts } from '../utils/getUpcomingEvents'
 import styles from './FeaturesAndEvents.module.css'
 
@@ -21,6 +27,12 @@ function getDayName(isoDate) {
 
 export default function FeaturesAndEvents() {
   const upcoming = useMemo(() => getUpcomingEvents(events), [])
+  const [rigbyModalOpen, setRigbyModalOpen] = useState(false)
+  const closeRigbyModal = useCallback(() => setRigbyModalOpen(false), [])
+  const [swapShopModalOpen, setSwapShopModalOpen] = useState(false)
+  const closeSwapShopModal = useCallback(() => setSwapShopModalOpen(false), [])
+  const [springMarketModalOpen, setSpringMarketModalOpen] = useState(false)
+  const closeSpringMarketModal = useCallback(() => setSpringMarketModalOpen(false), [])
 
   return (
     <aside className={styles.events}>
@@ -45,7 +57,36 @@ export default function FeaturesAndEvents() {
                   <span className={styles.badgeDayName}>{dayName}</span>
                 </div>
                 <div className={styles.eventBody}>
-                  <p className={styles.eventTitle}>{ev.title}</p>
+                  <div className={styles.eventTitleRow}>
+                    <p className={styles.eventTitle}>{ev.title}</p>
+                    {isRigbysFineArtExhibitEvent(ev.title) && (
+                      <button
+                        type="button"
+                        className={styles.learnMore}
+                        onClick={() => setRigbyModalOpen(true)}
+                      >
+                        Learn more
+                      </button>
+                    )}
+                    {isArtSupplySwapShopEvent(ev.title) && (
+                      <button
+                        type="button"
+                        className={styles.learnMore}
+                        onClick={() => setSwapShopModalOpen(true)}
+                      >
+                        Learn more
+                      </button>
+                    )}
+                    {isRigbysSpringMarketEvent(ev.title) && (
+                      <button
+                        type="button"
+                        className={styles.learnMore}
+                        onClick={() => setSpringMarketModalOpen(true)}
+                      >
+                        Learn more
+                      </button>
+                    )}
+                  </div>
                   <p className={styles.eventMeta}>
                     {ev.time && (
                       <span className={styles.metaItem}>
@@ -71,6 +112,10 @@ export default function FeaturesAndEvents() {
           })}
         </ul>
       )}
+
+      <RigbyFineArtExhibitModal open={rigbyModalOpen} onClose={closeRigbyModal} />
+      <ArtSupplySwapShopModal open={swapShopModalOpen} onClose={closeSwapShopModal} />
+      <RigbysSpringMarketModal open={springMarketModalOpen} onClose={closeSpringMarketModal} />
     </aside>
   )
 }

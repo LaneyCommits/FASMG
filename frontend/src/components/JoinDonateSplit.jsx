@@ -5,7 +5,7 @@ import styles from './JoinDonateSplit.module.css'
 export default function JoinDonateSplit() {
   return (
     <div className={styles.row}>
-      <Link to="/join" className={`${styles.card} ${styles.joinCard}`}>
+      <Link to="/membership" className={`${styles.card} ${styles.joinCard}`}>
         <span className={`${styles.iconWrap} ${styles.iconJoin}`}>
           <UserGroupIcon className={styles.icon} />
         </span>

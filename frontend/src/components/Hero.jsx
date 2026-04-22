@@ -34,7 +34,7 @@ export default function Hero() {
               <Button as={Link} to="/gallery" variant="primary" className={styles.heroCta}>
                 Explore Gallery →
               </Button>
-              <Button as={Link} to="/join" variant="secondary" className={styles.heroCta}>
+              <Button as={Link} to="/membership" variant="secondary" className={styles.heroCta}>
                 Join the Society
               </Button>
             </div>

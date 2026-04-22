@@ -13,7 +13,7 @@ const tabs = [
   { to: '/gallery', label: 'Gallery', icon: PhotoIcon },
   { to: '/events', label: 'Events', icon: CalendarDaysIcon },
   { to: '/about', label: 'About', icon: InformationCircleIcon },
-  { to: '/donate', label: 'Contact', icon: EnvelopeIcon },
+  { to: '/contact', label: 'Contact', icon: EnvelopeIcon },
 ]
 
 export default function BottomNav() {

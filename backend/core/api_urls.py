@@ -1,16 +1,9 @@
-"""Reserved for future JSON APIs (e.g. member artwork)."""
+"""JSON API routes."""
 
-from django.http import JsonResponse
-from django.urls import re_path
+from django.urls import path
 
-
-def api_placeholder(request):
-    return JsonResponse(
-        {"detail": "API routes are reserved for future use."},
-        status=501,
-    )
-
+from . import views
 
 urlpatterns = [
-    re_path(r"^.*$", api_placeholder),
+    path("contact/", views.contact_submission),
 ]
