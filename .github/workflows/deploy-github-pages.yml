@@ -36,6 +36,8 @@ jobs:
 
       - name: Install and build (static bundle for Pages)
         run: |
+          mkdir -p frontend/public/img
+          cp -a img/. frontend/public/img/
           cd frontend
           npm ci
           npm run build:gh-pages

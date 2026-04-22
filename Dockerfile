@@ -4,6 +4,9 @@ WORKDIR /app/frontend
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm ci
 COPY frontend/ ./
+# Repo-root `img/` is the canonical board/sponsor assets; merge into Vite public before build.
+COPY img /tmp/repo-img
+RUN mkdir -p public/img && cp -a /tmp/repo-img/. public/img/
 RUN npm run build
 
 # Stage 2: Django + WhiteNoise + Gunicorn
