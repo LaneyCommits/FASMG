@@ -308,21 +308,31 @@
     box-shadow: none;
   }
 
+  /* Avoid `bottom` on fixed panel: header backdrop-filter can shrink the fixed CB. */
   .menuPanels {
     position: fixed;
-    left: 0;
+    left: auto;
     right: 0;
     top: 4.9rem;
+    width: min(26rem, 100vw);
+    max-width: 100%;
     margin-top: 0;
     min-width: unset;
     border-radius: 0;
     border-top: 1px solid rgba(26, 54, 93, 0.08);
+    border-left: 1px solid rgba(26, 54, 93, 0.1);
+    box-shadow: -12px 0 40px rgba(26, 54, 93, 0.14);
+    padding-right: env(safe-area-inset-right, 0px);
+    box-sizing: border-box;
     max-height: 0;
     overflow: hidden;
   }
 
   .menuPanels[data-open='true'] {
+    opacity: 1;
+    pointer-events: auto;
     max-height: calc(100vh - 4.9rem);
+    max-height: calc(100dvh - 4.9rem);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -368,20 +378,11 @@
   }
 }
 
-/* Wide phones / small tablets: read as a dropdown card with actions beneath */
+/* Wide phones / small tablets: same right drawer; slightly softer inner card */
 @media (min-width: 640px) and (max-width: 880px) {
-  .menuPanels[data-open='true'] {
-    align-items: center;
-    padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
-  }
-
   .panelMobile {
-    max-width: 26rem;
-    width: 100%;
-    border: 1px solid rgba(26, 54, 93, 0.1);
-    border-top: none;
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 18px 44px rgba(26, 54, 93, 0.12);
+    border-left: 1px solid rgba(26, 54, 93, 0.06);
+    border-radius: 0 0 0 14px;
   }
 }
 
