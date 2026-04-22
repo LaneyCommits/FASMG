@@ -49,13 +49,13 @@ export default function FeatureCardsGrid() {
         {cards.map((c) => (
           <Link key={c.id} to={c.to} className={`${styles.card} ${accentClass[c.accent] || ''}`}>
             <div className={styles.cardImage}>
-              <img src={c.image} alt={c.imageAlt} className={styles.cardImg} loading="lazy" />
+              <img src={c.image} alt="" className={styles.cardImg} loading="lazy" />
             </div>
             <div className={styles.cardBody}>
               <h3 className={styles.cardTitle}>{c.title}</h3>
-              <p className={styles.cardDesc}>{c.desc}</p>
-              <span className={styles.cardArrow} aria-hidden="true">
-                <ChevronRightIcon className={styles.arrowIcon} />
+              <span className={styles.cardArrow}>
+                <span className={styles.learnMore}>Learn more</span>
+                <ChevronRightIcon className={styles.arrowIcon} aria-hidden />
               </span>
             </div>
           </Link>

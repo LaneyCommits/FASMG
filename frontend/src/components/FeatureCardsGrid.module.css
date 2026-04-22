@@ -61,7 +61,7 @@
 }
 
 .cardTitle {
-  margin: 0 0 clamp(0.2rem, 0.6vw, 0.35rem);
+  margin: 0;
   font-size: clamp(0.72rem, 1.6vw + 0.4rem, 1.05rem);
   font-weight: 700;
   line-height: 1.2;
@@ -69,21 +69,23 @@
   white-space: pre-line;
 }
 
-.cardDesc {
-  margin: 0;
-  font-size: clamp(0.6rem, 1.2vw + 0.35rem, 0.82rem);
-  color: var(--color-muted);
-  line-height: 1.4;
-}
-
 .cardArrow {
   margin-top: auto;
-  padding-top: 0.5rem;
+  padding-top: 0.35rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 0.3rem;
   color: rgba(26, 54, 93, 0.45);
   transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.learnMore {
+  font-family: var(--font-sans);
+  font-size: clamp(0.68rem, 1.35vw + 0.32rem, 0.82rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .card:hover .cardArrow {
@@ -109,6 +111,20 @@
 }
 
 @media (max-width: 639px) {
+  .cardBody {
+    padding: clamp(0.55rem, 1.8vw, 0.75rem) clamp(0.65rem, 2vw, 0.9rem) clamp(0.5rem, 1.5vw, 0.65rem);
+  }
+
+  .cardTitle {
+    font-size: clamp(0.68rem, 2.2vw + 0.38rem, 0.95rem);
+    line-height: 1.15;
+  }
+
+  .arrowIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+
   .card:hover {
     transform: none;
   }

@@ -54,44 +54,46 @@ export default function ClassesPage() {
       </section>
 
       <Section className={styles.page}>
-        <div className={styles.grid}>
-          {classes.map((c) => (
-            <article key={c.title} className={`${styles.card} ${styles[`accent_${c.accent}`]}`}>
-              <div className={styles.cardHeader}>
-                <h2 className={styles.cardTitle}>{c.title}</h2>
-                <span className={styles.instructorPill}>{c.instructor}</span>
-              </div>
+        <div className={styles.gridShell}>
+          <div className={styles.grid}>
+            {classes.map((c) => (
+              <article key={c.title} className={`${styles.card} ${styles[`accent_${c.accent}`]}`}>
+                <div className={styles.cardHeader}>
+                  <h2 className={styles.cardTitle}>{c.title}</h2>
+                  <span className={styles.instructorPill}>{c.instructor}</span>
+                </div>
 
-              <div className={styles.details}>
-                <div className={styles.detailRow}>
-                  <ClockIcon className={styles.detailIcon} aria-hidden />
-                  <span>{c.schedule}</span>
-                </div>
-                <div className={styles.detailRow}>
-                  <CurrencyDollarIcon className={styles.detailIcon} aria-hidden />
-                  <span>{c.price}</span>
-                </div>
-                {c.note && (
+                <div className={styles.details}>
                   <div className={styles.detailRow}>
-                    <MapPinIcon className={styles.detailIcon} aria-hidden />
-                    <span>{c.note}</span>
+                    <ClockIcon className={styles.detailIcon} aria-hidden />
+                    <span>{c.schedule}</span>
                   </div>
-                )}
-              </div>
+                  <div className={styles.detailRow}>
+                    <CurrencyDollarIcon className={styles.detailIcon} aria-hidden />
+                    <span>{c.price}</span>
+                  </div>
+                  {c.note && (
+                    <div className={styles.detailRow}>
+                      <MapPinIcon className={styles.detailIcon} aria-hidden />
+                      <span>{c.note}</span>
+                    </div>
+                  )}
+                </div>
 
-              <div className={styles.contact}>
-                <span className={styles.contactLabel}>Contact</span>
-                <a href={`tel:${c.phone.replace(/-/g, '')}`} className={styles.contactLink}>
-                  <PhoneIcon className={styles.contactIcon} aria-hidden />
-                  {c.phone}
-                </a>
-                <a href={`mailto:${c.email}`} className={styles.contactLink}>
-                  <EnvelopeIcon className={styles.contactIcon} aria-hidden />
-                  {c.email}
-                </a>
-              </div>
-            </article>
-          ))}
+                <div className={styles.contact}>
+                  <span className={styles.contactLabel}>Contact</span>
+                  <a href={`tel:${c.phone.replace(/-/g, '')}`} className={styles.contactLink}>
+                    <PhoneIcon className={styles.contactIcon} aria-hidden />
+                    {c.phone}
+                  </a>
+                  <a href={`mailto:${c.email}`} className={styles.contactLink}>
+                    <EnvelopeIcon className={styles.contactIcon} aria-hidden />
+                    {c.email}
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </Section>
     </>

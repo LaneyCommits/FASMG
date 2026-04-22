@@ -3,7 +3,7 @@ import { heroBackgroundArt } from '../data/heroImages'
 import styles from './HeroBackgroundCarousel.module.css'
 
 /** Dwell time on each slide before sliding to the next. */
-const INTERVAL_MS = 14000
+const INTERVAL_MS = 7000
 
 function preloadImages(urls) {
   return Promise.all(
@@ -89,30 +89,35 @@ export default function HeroBackgroundCarousel({ onActivePieceChange, onIndexCha
 
   return (
     <div className={styles.root} aria-hidden>
-      {imagesReady ? (
-        <div className={styles.viewport}>
-          <div
-            className={`${styles.track} ${instant ? styles.trackInstant : ''}`}
-            style={{
-              width: `${slideCount * 100}%`,
-              transform: `translateX(calc(-${index} * 100% / ${slideCount}))`,
-            }}
-            onTransitionEnd={onTransitionEnd}
-          >
-            {slides.map((p, i) => (
-              <div
-                key={`${p.imageUrl}-${i}`}
-                className={styles.slide}
-                style={{ flex: `0 0 calc(100% / ${slideCount})` }}
-              >
-                <div className={styles.slideMat}>
-                  <img src={p.imageUrl} alt="" className={styles.slideImg} decoding="async" />
-                </div>
+      <div className={styles.viewport}>
+        <div
+          className={`${styles.track} ${instant ? styles.trackInstant : ''}`}
+          style={{
+            width: `${slideCount * 100}%`,
+            transform: `translateX(calc(-${index} * 100% / ${slideCount}))`,
+          }}
+          onTransitionEnd={onTransitionEnd}
+        >
+          {slides.map((p, i) => (
+            <div
+              key={`${p.imageUrl}-${i}`}
+              className={styles.slide}
+              style={{ flex: `0 0 calc(100% / ${slideCount})` }}
+            >
+              <div className={styles.slideMat}>
+                <img
+                  src={p.imageUrl}
+                  alt=""
+                  className={styles.slideImg}
+                  style={p.objectPosition ? { objectPosition: p.objectPosition } : undefined}
+                  decoding={i === 0 ? 'sync' : 'async'}
+                  fetchPriority={i === 0 ? 'high' : undefined}
+                />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      ) : null}
+      </div>
       {piece ? (
         <span className={styles.visuallyHidden} aria-live="polite">
           {piece.title} — {piece.artistName}

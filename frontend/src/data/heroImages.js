@@ -6,24 +6,31 @@
 const BASE = import.meta.env.BASE_URL
 
 export const HERO_IMAGE_FILES = [
-  'birdsmakingjoyfulnoiseAC.png',
-  'cathycomptonbird.png',
-  'cathycomptonherron.png',
+  'AllanCaryVirtualGallery/birdsmakingjoyfulnoiseAllanCarey.avif',
+  'home-hero-heron.png',
+  'home-hero-songbird.png',
+  'AprilJVirtualGallery/AJEliseFinal.avif',
 ]
 
 /** Optional artist (and title) per filename; carousel falls back to defaults below. */
 const metaByFile = {
-  'birdsmakingjoyfulnoiseAC.png': {
+  'AllanCaryVirtualGallery/birdsmakingjoyfulnoiseAllanCarey.avif': {
     artistName: 'Allan Carey',
     title: 'Birds Making Joyful Noise',
   },
-  'cathycomptonbird.png': {
-    artistName: 'Cathy Compton',
-    title: 'Songbird',
+  'AprilJVirtualGallery/AJEliseFinal.avif': {
+    artistName: 'April J.',
+    title: 'Elise',
   },
-  'cathycomptonherron.png': {
+  'home-hero-heron.png': {
     artistName: 'Cathy Compton',
     title: 'Heron',
+    /** Prefer head/top of portrait heron in hero crop */
+    objectPosition: 'center top',
+  },
+  'home-hero-songbird.png': {
+    artistName: 'Cathy Compton',
+    title: 'Songbird',
   },
 }
 
@@ -33,5 +40,6 @@ export const heroBackgroundArt = HERO_IMAGE_FILES.map((file, i) => {
     imageUrl: `${BASE}img/${file}`,
     title: meta.title ?? `Member artwork ${i + 1}`,
     artistName: meta.artistName ?? 'Fine Arts Society of Middle GA',
+    ...(meta.objectPosition ? { objectPosition: meta.objectPosition } : {}),
   }
 })

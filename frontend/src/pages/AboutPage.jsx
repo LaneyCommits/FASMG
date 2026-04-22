@@ -27,12 +27,42 @@ export default function AboutPage() {
       <Section className={styles.section}>
         <div className={styles.content}>
           <article className={styles.block}>
-            <h2 className={styles.blockTitle}>Mission</h2>
-            <p className={styles.body}>{missionCopy}</p>
+            <div className={`${styles.blockMedia} ${styles.blockMediaMission}`}>
+              <div className={styles.mediaWrap}>
+                <img
+                  className={styles.mediaImage}
+                  src={`${BASE}img/EventPics/PaintingPumpkins.jpg`}
+                  alt="Fine Art Society members painting pumpkins at a community event."
+                  width={1200}
+                  height={800}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className={styles.textColumn}>
+                <h2 className={styles.blockTitle}>Mission</h2>
+                <p className={styles.body}>{missionCopy}</p>
+              </div>
+            </div>
           </article>
           <article className={styles.block}>
-            <h2 className={styles.blockTitle}>History</h2>
-            <p className={styles.body}>{historyCopy}</p>
+            <div className={`${styles.blockMedia} ${styles.blockMediaHistory}`}>
+              <div className={styles.textColumn}>
+                <h2 className={styles.blockTitle}>History</h2>
+                <p className={styles.body}>{historyCopy}</p>
+              </div>
+              <div className={styles.mediaWrap}>
+                <img
+                  className={styles.mediaImage}
+                  src={`${BASE}img/EventPics/CarPaintEvent.jpg`}
+                  alt="Car painting workshop outdoors with Fine Art Society participants."
+                  width={1200}
+                  height={800}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
           </article>
         </div>
       </Section>

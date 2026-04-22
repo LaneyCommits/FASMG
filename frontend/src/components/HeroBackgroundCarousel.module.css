@@ -3,7 +3,8 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-color: var(--color-navy);
+  /* No solid fill — avoids navy “matting” around slides; body/page shows through while loading */
+  background-color: transparent;
 }
 
 .viewport {
