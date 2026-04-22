@@ -8,25 +8,21 @@ const primaryLinks = [
   { to: '/gallery', label: 'Gallery' },
   { to: '/classes', label: 'Classes' },
   { to: '/events', label: 'Events' },
-  { to: '/membership', label: 'Membership' },
 ]
 
 const menuLinks = [
   { to: '/boardmembers', label: 'Board Members' },
-  { to: '/donate', label: 'Donate' },
   { to: '/contact', label: 'Contact' },
 ]
 
-/** Mobile “All pages” menu order (matches primary row + More). */
+/** Mobile “All pages” scroll list (Join + Donate are separate CTAs below). */
 const mobileNavLinks = [
   { to: '/', label: 'Home', end: true },
   { to: '/about', label: 'About' },
   { to: '/gallery', label: 'Gallery' },
   { to: '/classes', label: 'Classes' },
   { to: '/events', label: 'Events' },
-  { to: '/membership', label: 'Membership' },
   { to: '/boardmembers', label: 'Board Members' },
-  { to: '/donate', label: 'Donate' },
   { to: '/contact', label: 'Contact' },
 ]
 
@@ -80,6 +76,30 @@ export default function Navbar() {
             ))}
           </nav>
 
+          <div className={styles.ctaCluster} aria-label="Support the society">
+            <NavLink
+              to="/membership"
+              className={({ isActive }) =>
+                `${styles.ctaJoin} ${isActive ? styles.ctaJoinActive : ''}`
+              }
+              onClick={() => setOpen(false)}
+            >
+              Join the Society
+            </NavLink>
+            <NavLink
+              to="/donate"
+              className={({ isActive }) =>
+                `${styles.ctaDonate} ${isActive ? styles.ctaDonateActive : ''}`
+              }
+              onClick={() => setOpen(false)}
+            >
+              <span className={styles.ctaDonateIcon} aria-hidden>
+                💛
+              </span>
+              Donate
+            </NavLink>
+          </div>
+
           <button
             type="button"
             className={styles.menuBtn}
@@ -116,6 +136,29 @@ export default function Navbar() {
                   {label}
                 </NavLink>
               ))}
+              <div className={styles.mobileCtas}>
+                <NavLink
+                  to="/membership"
+                  className={({ isActive }) =>
+                    `${styles.mobileCtaJoin} ${isActive ? styles.mobileCtaJoinActive : ''}`
+                  }
+                  onClick={() => setOpen(false)}
+                >
+                  Join the Society
+                </NavLink>
+                <NavLink
+                  to="/donate"
+                  className={({ isActive }) =>
+                    `${styles.mobileCtaDonate} ${isActive ? styles.mobileCtaDonateActive : ''}`
+                  }
+                  onClick={() => setOpen(false)}
+                >
+                  <span className={styles.ctaDonateIcon} aria-hidden>
+                    💛
+                  </span>
+                  Donate
+                </NavLink>
+              </div>
             </nav>
           </div>
         </div>
