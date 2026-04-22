@@ -13,9 +13,11 @@ const primaryLinks = [
 const menuLinks = [
   { to: '/boardmembers', label: 'Board Members' },
   { to: '/contact', label: 'Contact' },
+  { to: '/membership', label: 'Join the Society', cta: 'join' },
+  { to: '/donate', label: 'Donate', cta: 'donate' },
 ]
 
-/** Mobile “All pages” scroll list (Join + Donate are separate CTAs below). */
+/** Mobile “All pages” (same destinations as desktop menu + primary row). */
 const mobileNavLinks = [
   { to: '/', label: 'Home', end: true },
   { to: '/about', label: 'About' },
@@ -24,6 +26,8 @@ const mobileNavLinks = [
   { to: '/events', label: 'Events' },
   { to: '/boardmembers', label: 'Board Members' },
   { to: '/contact', label: 'Contact' },
+  { to: '/membership', label: 'Join the Society', cta: 'join' },
+  { to: '/donate', label: 'Donate', cta: 'donate' },
 ]
 
 export default function Navbar() {
@@ -76,30 +80,6 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className={styles.ctaCluster} aria-label="Support the society">
-            <NavLink
-              to="/membership"
-              className={({ isActive }) =>
-                `${styles.ctaJoin} ${isActive ? styles.ctaJoinActive : ''}`
-              }
-              onClick={() => setOpen(false)}
-            >
-              Join the Society
-            </NavLink>
-            <NavLink
-              to="/donate"
-              className={({ isActive }) =>
-                `${styles.ctaDonate} ${isActive ? styles.ctaDonateActive : ''}`
-              }
-              onClick={() => setOpen(false)}
-            >
-              <span className={styles.ctaDonateIcon} aria-hidden>
-                💛
-              </span>
-              Donate
-            </NavLink>
-          </div>
-
           <button
             type="button"
             className={styles.menuBtn}
@@ -113,52 +93,65 @@ export default function Navbar() {
 
           <div id="site-menu-panels" className={styles.menuPanels} data-open={open}>
             <nav className={styles.panelDesktop} aria-label="More pages">
-              {menuLinks.map(({ to, label }) => (
+              {menuLinks.map(({ to, label, cta }) => (
                 <NavLink
                   key={to}
                   to={to}
-                  className={({ isActive }) => `${styles.menuLink} ${isActive ? styles.menuLinkActive : ''}`}
+                  className={({ isActive }) =>
+                    [
+                      styles.menuLink,
+                      cta === 'join' && styles.menuLinkCtaJoin,
+                      cta === 'donate' && styles.menuLinkCtaDonate,
+                      isActive && styles.menuLinkActive,
+                    ]
+                      .filter(Boolean)
+                      .join(' ')
+                  }
                   onClick={() => setOpen(false)}
                 >
-                  {label}
+                  {cta === 'donate' ? (
+                    <>
+                      <span className={styles.ctaDonateIcon} aria-hidden>
+                        💛
+                      </span>{' '}
+                      {label}
+                    </>
+                  ) : (
+                    label
+                  )}
                 </NavLink>
               ))}
             </nav>
             <nav className={styles.panelMobile} aria-label="All pages">
-              {mobileNavLinks.map(({ to, label, end }) => (
+              {mobileNavLinks.map(({ to, label, end, cta }) => (
                 <NavLink
                   key={to}
                   to={to}
                   end={end}
-                  className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
+                  className={({ isActive }) =>
+                    [
+                      styles.link,
+                      cta === 'join' && styles.linkCtaJoin,
+                      cta === 'donate' && styles.linkCtaDonate,
+                      isActive && styles.active,
+                    ]
+                      .filter(Boolean)
+                      .join(' ')
+                  }
                   onClick={() => setOpen(false)}
                 >
-                  {label}
+                  {cta === 'donate' ? (
+                    <>
+                      <span className={styles.ctaDonateIcon} aria-hidden>
+                        💛
+                      </span>{' '}
+                      {label}
+                    </>
+                  ) : (
+                    label
+                  )}
                 </NavLink>
               ))}
-              <div className={styles.mobileCtas}>
-                <NavLink
-                  to="/membership"
-                  className={({ isActive }) =>
-                    `${styles.mobileCtaJoin} ${isActive ? styles.mobileCtaJoinActive : ''}`
-                  }
-                  onClick={() => setOpen(false)}
-                >
-                  Join the Society
-                </NavLink>
-                <NavLink
-                  to="/donate"
-                  className={({ isActive }) =>
-                    `${styles.mobileCtaDonate} ${isActive ? styles.mobileCtaDonateActive : ''}`
-                  }
-                  onClick={() => setOpen(false)}
-                >
-                  <span className={styles.ctaDonateIcon} aria-hidden>
-                    💛
-                  </span>
-                  Donate
-                </NavLink>
-              </div>
             </nav>
           </div>
         </div>
