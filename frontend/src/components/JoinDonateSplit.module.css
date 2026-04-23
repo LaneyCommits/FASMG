@@ -42,14 +42,8 @@
 .icon {
   width: clamp(1rem, 3vw, 1.25rem);
   height: clamp(1rem, 3vw, 1.25rem);
-}
-
-.iconJoin .icon {
-  color: var(--color-navy);
-}
-
-.iconDonate .icon {
-  color: var(--color-orange);
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .cardBody {

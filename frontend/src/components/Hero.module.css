@@ -1,210 +1,320 @@
+/* Homepage hero — same art framing (1024/682) + copy band at every breakpoint; scales down on narrow viewports */
+
 .hero {
-  padding: clamp(0.5rem, 1.5vw, 1rem) 0 clamp(0.15rem, 0.75vw, 0.35rem);
+  padding: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .heroNoAnim .inner,
-.heroNoAnim .mediaOverlay,
-.heroNoAnim .copy {
+.heroNoAnim .copy,
+.heroNoAnim .lede {
   transition: none !important;
   animation: none !important;
 }
 
-.heroNoAnim .actions a.heroCta {
+.heroNoAnim .actions a {
   transition: none !important;
 }
 
-.heroNoAnim .actions a.heroCta:hover {
+.heroNoAnim .actions a:hover {
   transform: none;
 }
 
 .inner {
   position: relative;
   width: 100%;
-  max-width: var(--max-content);
-  margin-inline: auto;
-  min-height: clamp(400px, 62vh, 760px);
-  overflow: hidden;
+  max-width: none;
+  margin: 0;
   isolation: isolate;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  align-items: end;
+  display: flex;
+  flex-direction: column;
+  /* Same art proportions as home-hero-main.png (1024×682); never shorter than a readable copy band */
+  aspect-ratio: 1024 / 682;
+  min-height: max(calc(100vw * 682 / 1024), clamp(220px, 52vw, 300px));
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
-/* Background carousel layer */
-.mediaCol {
+.bgLayer {
   position: absolute;
   inset: 0;
   z-index: 0;
-  overflow: hidden;
-  border-radius: inherit;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center calc(50% - clamp(0.12rem, 0.35vw, 0.5rem));
 }
 
-.mediaViewport {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-/* Gradient: transparent top → dark bottom for text readability */
-.mediaOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 25%,
-    rgba(26, 54, 93, 0.18) 45%,
-    rgba(26, 54, 93, 0.52) 62%,
-    rgba(26, 54, 93, 0.78) 78%,
-    rgba(15, 36, 68, 0.92) 100%
-  );
-  pointer-events: none;
-}
-
-/* Copy layer: sits at the bottom of the hero */
-.copyCol {
+.contentRow {
+  --hero-ink-a: 26, 43, 60;
+  flex: 1 1 auto;
   position: relative;
-  z-index: 2;
-  grid-column: 1;
-  grid-row: 1;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  /* Match reference: copy block sits in vertical center on large heroes */
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 0;
+  overflow: visible;
+}
+
+/* Ink wash behind copy (left); mask keeps top-right clear */
+.contentRow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 125% 88% at 16% -12%,
+      rgba(var(--hero-ink-a), 0.82) 0%,
+      rgba(var(--hero-ink-a), 0.42) 38%,
+      rgba(var(--hero-ink-a), 0.12) 62%,
+      transparent 78%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(var(--hero-ink-a), 0.38) 0%,
+      rgba(var(--hero-ink-a), 0.14) 32%,
+      rgba(var(--hero-ink-a), 0.04) 52%,
+      transparent 72%
+    );
+  -webkit-mask-image: radial-gradient(
+    ellipse 85% 72% at 100% 0%,
+    transparent 0%,
+    transparent 36%,
+    #000 62%,
+    #000 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 85% 72% at 100% 0%,
+    transparent 0%,
+    transparent 36%,
+    #000 62%,
+    #000 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.copyPanel {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(1rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.25rem);
+  justify-content: flex-start;
+  align-self: flex-start;
+  width: 100%;
+  /* ~half the hero on large screens; fluid on narrow (same structure everywhere) */
+  max-width: min(52rem, min(92vw, 56vw + 1.5rem));
+  margin-inline: 0;
+  box-sizing: border-box;
+  padding: clamp(0.85rem, 1.8vw, 1.75rem) clamp(1rem, 3.5vw, 3.5rem) clamp(0.75rem, 2vw, 1.65rem);
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  overflow: visible;
 }
 
 .quoteAnchor {
-  grid-column: 1;
-  grid-row: 1;
+  position: absolute;
+  inset: 0;
   z-index: 3;
-  position: relative;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
 }
 
 .copy {
-  display: flex;
-  flex-direction: column;
-  max-width: min(34rem, 100%);
-}
-
-.headline {
-  margin: 0 0 clamp(0.25rem, 0.8vw, 0.5rem);
-  font-size: clamp(1.65rem, 3.5vw + 0.85rem, 2.85rem);
-  font-weight: 800;
-  color: #fff;
-  text-shadow: 0 2px 8px rgba(15, 36, 68, 0.35);
-  line-height: 1.08;
-}
-
-.tagline {
-  font-family: var(--font-script);
-  font-size: clamp(1.2rem, 2.2vw + 0.5rem, 1.85rem);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--color-orange);
-  margin: 0 0 clamp(0.35rem, 1.2vw, 0.65rem);
-  /* Dark outline + depth + soft orange glow so script stays readable */
-  text-shadow:
-    0 0 1px rgba(15, 36, 68, 0.95),
-    0 1px 0 rgba(15, 36, 68, 0.55),
-    0 2px 5px rgba(15, 36, 68, 0.5),
-    0 0 14px rgba(226, 135, 67, 0.45);
-}
-
-.lede {
-  margin: 0 0 clamp(0.55rem, 1.5vw, 0.85rem);
-  color: rgba(255, 255, 255, 0.88);
-  max-width: 38ch;
-  font-size: clamp(0.8rem, 1vw + 0.55rem, 1rem);
-  line-height: 1.5;
-  text-shadow: 0 1px 3px rgba(15, 36, 68, 0.18);
-}
-
-.actions {
   position: relative;
   z-index: 1;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Fluid type: same hierarchy at every width; caps lift on very large viewports */
+.headline {
+  margin: 0 0 clamp(0.32rem, 0.85vw, 0.85rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 0.95rem + 3.6vw, 4.75rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 12.5em;
+}
+
+.tagline {
+  font-family: var(--font-script-brand);
+  font-size: clamp(1.1rem, 0.65rem + 2.15vw, 3.05rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--home-gold, #d4af37);
+  margin: 0 0 clamp(0.4rem, 1.2vw, 1.1rem);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.lede {
+  margin: 0 0 clamp(0.55rem, 1.35vw, 1.35rem);
+  font-family: var(--font-sans);
+  font-size: clamp(0.8rem, 0.68rem + 0.45vw, 1.12rem);
+  line-height: 1.58;
+  color: rgba(255, 255, 255, 0.94);
+  max-width: 42ch;
+}
+
+.actions {
+  display: flex;
   flex-wrap: wrap;
-  gap: clamp(0.45rem, 1.2vw, 0.65rem) clamp(0.65rem, 1.5vw, 0.85rem);
+  gap: clamp(0.45rem, 1.25vw, 0.75rem) clamp(0.5rem, 1.5vw, 1rem);
 }
 
-.actions a.heroCta {
-  box-shadow: 0 4px 14px rgba(15, 36, 68, 0.2);
-  border-color: rgba(255, 255, 255, 0.45);
+.ctaGold,
+.ctaOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: clamp(0.52rem, 0.9vw + 0.35rem, 0.88rem) clamp(0.75rem, 1.8vw + 0.35rem, 1.65rem);
+  font-family: var(--font-sans);
+  font-size: clamp(0.74rem, 0.42rem + 0.85vw, 1.08rem);
+  font-weight: 600;
+  border-radius: clamp(10px, 0.65vw, 14px);
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
-/* ---- Desktop wide: full-bleed media, copy aligned to content width ---- */
-@media (min-width: 1025px) {
-  .hero {
-    padding: 0 0 clamp(0.15rem, 0.75vw, 0.35rem);
-  }
+.ctaGold {
+  background: linear-gradient(165deg, #e8cc66 0%, var(--home-gold, #d4af37) 42%, #b8922c 100%);
+  color: var(--home-ink, #1a2b3c);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
 
-  .inner {
-    max-width: none;
-    width: 100%;
-    min-height: clamp(400px, calc(70svh - 5.5rem), 780px);
-  }
+.ctaGold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
 
-  .copyCol {
-    max-width: var(--max-content-wide);
-    width: 100%;
-    margin-inline: auto;
-    box-sizing: border-box;
+.ctaOutline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.88);
+}
+
+.ctaOutline:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+@media (max-width: 900px) {
+  .contentRow::before {
+    background:
+      radial-gradient(
+        ellipse 140% 100% at 22% -8%,
+        rgba(var(--hero-ink-a), 0.78) 0%,
+        rgba(var(--hero-ink-a), 0.36) 40%,
+        rgba(var(--hero-ink-a), 0.1) 64%,
+        transparent 80%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(var(--hero-ink-a), 0.34) 0%,
+        rgba(var(--hero-ink-a), 0.12) 36%,
+        rgba(var(--hero-ink-a), 0.03) 56%,
+        transparent 76%
+      );
+    -webkit-mask-image: radial-gradient(
+      ellipse 90% 78% at 100% 0%,
+      transparent 0%,
+      transparent 34%,
+      #000 60%,
+      #000 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 90% 78% at 100% 0%,
+      transparent 0%,
+      transparent 34%,
+      #000 60%,
+      #000 100%
+    );
   }
 }
 
-/* ---- Tablet ---- */
-@media (min-width: 721px) and (max-width: 1024px) {
-  .inner {
-    min-height: clamp(400px, min(58vh, 56svh), 720px);
-  }
-}
-
-/* ---- Mobile ---- */
 @media (max-width: 720px) {
-  .hero {
-    padding: clamp(0.25rem, 1vw, 0.5rem) 0;
-  }
-
+  /* Short aspect-ratio heroes on phones: enough min height + dvh so CTAs stay in view */
   .inner {
-    min-height: clamp(340px, 58vh, 620px);
+    min-height: max(
+      calc(100vw * 682 / 1024),
+      clamp(300px, 78vw, 400px),
+      46dvh
+    );
   }
 
-  .copyCol {
-    padding: clamp(0.85rem, 2.5vw, 1.25rem) clamp(0.85rem, 2.5vw, 1.15rem);
+  .contentRow {
+    align-items: flex-start;
+  }
+
+  .copyPanel {
+    /* Pull stack up so buttons clear the fold / next section */
+    padding-top: clamp(0.45rem, 2.2vw, 0.95rem);
+    padding-inline: clamp(0.75rem, 3vw, 1.1rem);
+    padding-bottom: clamp(0.45rem, 2vw, 0.85rem);
   }
 
   .headline {
-    font-size: clamp(1.55rem, 7.5vw, 2.3rem);
+    font-size: clamp(1.2rem, 5vw + 0.35rem, 1.95rem);
+    line-height: 1.08;
+    margin-bottom: clamp(0.18rem, 1vw, 0.35rem);
+    max-width: none;
   }
 
   .tagline {
-    font-size: clamp(1.05rem, 4.5vw, 1.45rem);
+    font-size: clamp(0.95rem, 3.5vw + 0.2rem, 1.35rem);
+    margin-bottom: clamp(0.28rem, 1.5vw, 0.45rem);
   }
 
   .lede {
-    font-size: clamp(0.76rem, 3vw, 0.88rem);
+    max-width: 100%;
+    font-size: clamp(0.68rem, 2.6vw + 0.2rem, 0.8rem);
     line-height: 1.45;
-    max-width: 32ch;
+    margin-bottom: clamp(0.35rem, 2vw, 0.55rem);
   }
 
   .actions {
-    gap: 0.35rem 0.45rem;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0.35rem;
+    width: 100%;
+    max-width: 100%;
   }
 
-  /* Higher specificity than Button.module so padding/size actually apply */
-  .actions a.heroCta {
-    padding: 0.38rem 0.65rem;
-    font-size: clamp(0.65rem, 2.2vw, 0.78rem);
-    font-weight: 600;
-    border-width: 1.5px;
+  .ctaGold,
+  .ctaOutline {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    text-align: center;
     line-height: 1.25;
-    min-height: 0;
-    box-shadow: 0 3px 10px rgba(15, 36, 68, 0.18);
+    white-space: normal;
+    padding: 0.42rem 0.45rem;
+    font-size: clamp(0.62rem, 2.5vw + 0.12rem, 0.78rem);
   }
 
+  .ctaGold:hover,
+  .ctaOutline:hover {
+    transform: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .copyPanel {
+    padding-left: clamp(2.25rem, 4vw, 4.5rem);
+  }
 }

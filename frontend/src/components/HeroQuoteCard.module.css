@@ -12,50 +12,69 @@
 .card {
   position: absolute;
   z-index: 3;
-  right: clamp(0.75rem, 2vw, 1.25rem);
-  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  right: clamp(0.65rem, 2vw, 1.35rem);
+  /* Clear the hero bottom / brushstroke; larger bottom = higher on the hero */
+  bottom: clamp(8.75rem, 19vw, 14.5rem);
   left: auto;
   top: auto;
-  max-width: min(168px, 32vw);
-  padding: 0.55rem 0.65rem 0.62rem;
+  max-width: min(168px, 36vw);
+  padding: 0.48rem 0.62rem 0.54rem;
   text-align: right;
-  transform: rotate(-1.25deg);
+  transform: rotate(-1.5deg);
   transform-origin: 100% 100%;
-  background: linear-gradient(
-    155deg,
-    #fffef9 0%,
-    #faf6ee 38%,
-    #f3ebe0 72%,
-    #ebe2d4 100%
-  );
+  background: linear-gradient(155deg, #243a52 0%, #1a2b3c 55%, #152536 100%);
   clip-path: polygon(
-    0% 2%, 4% 0%, 12% 1%, 22% 0%, 35% 2%, 48% 0%, 62% 2%,
-    78% 0%, 92% 2%, 100% 0%, 99% 12%, 100% 28%, 98% 44%,
-    100% 58%, 99% 72%, 100% 88%, 98% 100%, 82% 99%, 64% 100%,
-    48% 98%, 32% 100%, 16% 99%, 0% 100%, 1% 86%, 0% 70%,
-    2% 54%, 0% 38%, 2% 22%, 0% 8%
+    2% 4%,
+    10% 0%,
+    22% 3%,
+    38% 0%,
+    54% 4%,
+    70% 1%,
+    86% 4%,
+    100% 2%,
+    98% 18%,
+    100% 36%,
+    97% 52%,
+    100% 70%,
+    98% 88%,
+    100% 100%,
+    82% 98%,
+    64% 100%,
+    46% 97%,
+    28% 100%,
+    10% 98%,
+    0% 100%,
+    2% 82%,
+    0% 64%,
+    3% 46%,
+    0% 28%,
+    2% 12%
   );
-  filter: drop-shadow(0 6px 12px rgba(26, 54, 93, 0.1)) drop-shadow(0 1px 2px rgba(26, 54, 93, 0.05));
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.32));
+  border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .artist {
   margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(0.72rem, 1.35vw, 0.82rem);
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: clamp(0.62rem, 1.05vw, 0.74rem);
+  font-weight: 700;
   font-style: normal;
-  line-height: 1.35;
-  color: var(--color-navy);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  line-height: 1.3;
+  color: #fff;
+  letter-spacing: 0.02em;
   animation: captionIn 0.38s ease-out;
 }
 
 .title {
-  margin: 0.22rem 0 0;
-  font-size: clamp(0.58rem, 1.05vw, 0.68rem);
-  letter-spacing: 0.02em;
-  line-height: 1.4;
-  color: var(--color-muted);
+  margin: 0.2rem 0 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.52rem, 0.88vw, 0.64rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: var(--home-gold, #d4af37);
   animation: captionIn 0.38s ease-out 0.04s both;
 }
 
@@ -70,39 +89,53 @@
   }
 }
 
+/* Extra lift on wide hero / large screens (clamp max alone plateaus on very wide viewports) */
+@media (min-width: 1024px) {
+  .card {
+    bottom: clamp(11.5rem, 17vw, 18.5rem);
+  }
+}
+
+@media (min-width: 1440px) {
+  .card {
+    bottom: clamp(13rem, 18vw, 21rem);
+  }
+}
+
 @media (max-width: 720px) {
   .card {
-    max-width: min(128px, 36vw);
-    right: clamp(0.55rem, 1.5vw, 0.75rem);
-    bottom: clamp(3.5rem, 10vw, 5rem);
-    padding: 0.42rem 0.52rem 0.46rem;
-    transform: rotate(-0.5deg);
+    max-width: min(118px, 36vw);
+    right: clamp(0.4rem, 1.6vw, 0.65rem);
+    bottom: clamp(7.85rem, 17vw, 9.75rem);
+    padding: 0.32rem 0.42rem 0.36rem;
+    transform: rotate(-0.65deg);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
   }
 
   .artist {
-    font-size: clamp(0.64rem, 2.4vw, 0.74rem);
+    font-size: clamp(0.52rem, 2.1vw, 0.62rem);
   }
 
   .title {
-    font-size: clamp(0.54rem, 2vw, 0.62rem);
-    margin-top: 0.15rem;
+    font-size: clamp(0.42rem, 1.75vw, 0.54rem);
+    margin-top: 0.1rem;
   }
 }
 
 @media (max-width: 480px) {
   .card {
-    max-width: min(108px, 34vw);
-    padding: 0.32rem 0.4rem 0.36rem;
+    max-width: min(100px, 32vw);
+    right: clamp(0.35rem, 1.4vw, 0.55rem);
+    bottom: clamp(7.6rem, 19vw, 9.25rem);
+    padding: 0.26rem 0.36rem 0.3rem;
   }
 
   .artist {
-    font-size: clamp(0.52rem, 2.65vw, 0.62rem);
-    line-height: 1.3;
+    font-size: clamp(0.48rem, 2.6vw, 0.56rem);
   }
 
   .title {
-    font-size: clamp(0.45rem, 2.1vw, 0.54rem);
-    margin-top: 0.1rem;
-    line-height: 1.35;
+    font-size: clamp(0.38rem, 2.2vw, 0.48rem);
+    margin-top: 0.08rem;
   }
 }

@@ -1,0 +1,23 @@
+.wrap {
+  width: 100%;
+  line-height: 0;
+  position: relative;
+  z-index: 4;
+  flex-shrink: 0;
+  margin-top: auto;
+  /* Fills the transparent band above the path (viewBox y=0 → wave) so nothing flashes white */
+  background: linear-gradient(
+    180deg,
+    rgba(253, 248, 238, 0) 0%,
+    rgba(253, 248, 238, 0.45) 32%,
+    var(--home-cream, #fdf8ee) 68%,
+    var(--home-cream, #fdf8ee) 100%
+  );
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: clamp(44px, 6vw, 72px);
+  filter: drop-shadow(0 3px 10px rgba(26, 43, 60, 0.07));
+}

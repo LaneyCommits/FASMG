@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
-import {
-  PaintBrushIcon,
-  PhotoIcon,
-  CalendarDaysIcon,
-  UserGroupIcon,
-} from '@heroicons/react/24/solid'
 import styles from './FeatureCard.module.css'
+
+import drawIcon from '@img/icons/draw.jpg.jpeg?url'
+import galleryIcon from '@img/icons/gallery.jpg.jpeg?url'
+import calIcon from '@img/icons/cal.jpg.jpeg?url'
+import connectIcon from '@img/icons/connect.jpg.jpeg?url'
 
 const accentClass = {
   orange: styles.accentOrange,
@@ -14,22 +13,22 @@ const accentClass = {
   navy: styles.accentNavy,
 }
 
-const ICONS = {
-  classes: PaintBrushIcon,
-  gallery: PhotoIcon,
-  events: CalendarDaysIcon,
-  membership: UserGroupIcon,
+const ICON_SRC = {
+  classes: drawIcon,
+  gallery: galleryIcon,
+  events: calIcon,
+  membership: connectIcon,
 }
 
 export default function FeatureCard({ id, title, description, imageUrl, to, accent }) {
-  const Icon = ICONS[id] ?? PhotoIcon
+  const iconSrc = ICON_SRC[id] ?? galleryIcon
 
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
         <img src={imageUrl} alt="" className={styles.image} loading="lazy" />
         <span className={`${styles.iconBadge} ${accentClass[accent] || ''}`} aria-hidden="true">
-          <Icon className={styles.iconSvg} />
+          <img src={iconSrc} alt="" className={styles.iconImg} />
         </span>
       </div>
       <div className={styles.body}>

@@ -40,15 +40,17 @@
   box-shadow: 0 8px 18px rgba(26, 54, 93, 0.12);
 }
 
-.iconSvg {
+.iconImg {
   width: 1.2rem;
   height: 1.2rem;
-  color: #fff;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-.accentBlue .iconSvg,
-.accentGold .iconSvg {
-  color: var(--color-navy);
+.accentBlue .iconImg,
+.accentGold .iconImg {
+  /* Raster badge — no stroke; keep circular crop */
+  object-fit: cover;
 }
 
 .accentOrange {
@@ -123,8 +125,9 @@
     box-shadow: 0 4px 10px rgba(26, 54, 93, 0.1);
   }
 
-  .iconSvg {
+  .iconImg {
     width: 0.8rem;
+    height: 0.8rem;
   }
 
   .body {

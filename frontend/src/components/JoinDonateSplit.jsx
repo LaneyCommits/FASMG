@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom'
-import { UserGroupIcon, HeartIcon } from '@heroicons/react/24/solid'
 import styles from './JoinDonateSplit.module.css'
+
+import connectIcon from '@img/icons/connect.jpg.jpeg?url'
+import donateIcon from '@img/icons/donate.jpg.jpeg?url'
 
 export default function JoinDonateSplit() {
   return (
     <div className={styles.row}>
       <Link to="/membership" className={`${styles.card} ${styles.joinCard}`}>
         <span className={`${styles.iconWrap} ${styles.iconJoin}`}>
-          <UserGroupIcon className={styles.icon} />
+          <img src={connectIcon} alt="" className={styles.icon} width={24} height={24} />
         </span>
         <div className={styles.cardBody}>
           <h3 className={styles.title}>Join the Society</h3>
@@ -17,7 +19,7 @@ export default function JoinDonateSplit() {
       </Link>
       <Link to="/donate" className={`${styles.card} ${styles.donateCard}`}>
         <span className={`${styles.iconWrap} ${styles.iconDonate}`}>
-          <HeartIcon className={styles.icon} />
+          <img src={donateIcon} alt="" className={styles.icon} width={24} height={24} />
         </span>
         <div className={styles.cardBody}>
           <h3 className={styles.title}>Support the Arts</h3>

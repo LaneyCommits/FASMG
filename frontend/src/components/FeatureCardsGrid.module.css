@@ -1,135 +1,272 @@
-.heading {
-  margin: 0 0 clamp(0.75rem, 2vw, 1.25rem);
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  color: var(--color-navy);
+.wrap {
+  width: 100%;
 }
 
-.grid {
+/* Reference: intro column + four feature columns on large screens */
+.layout {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.5rem, 1.8vw, 1.25rem);
+  grid-template-columns: 1fr;
+  gap: clamp(1.35rem, 3vw, 2.25rem);
+  align-items: start;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  text-align: left;
-  text-decoration: none;
-  color: inherit;
-  padding: 0;
-  overflow: hidden;
-  border-radius: clamp(12px, 2vw, 18px);
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(26, 54, 93, 0.08);
-  box-shadow: 0 6px 20px rgba(26, 54, 93, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+@media (min-width: 960px) {
+  .layout {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 2.05fr);
+    gap: clamp(1.5rem, 3.5vw, 3rem);
+  }
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(26, 54, 93, 0.1);
+/* Intro only shows beside the pillar grid; stacked mobile layout hides it */
+@media (max-width: 959px) {
+  .intro {
+    display: none;
+  }
 }
 
-.cardImage {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  flex-shrink: 0;
-  min-height: 0;
-  overflow: hidden;
-  background: rgba(26, 54, 93, 0.06);
-}
-
-/* Absolute fill so tall/wide source assets never stretch the slot (flex min-height:auto). */
-.cardImg {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  padding: clamp(0.7rem, 2vw, 1rem) clamp(0.75rem, 2vw, 1.1rem) clamp(0.65rem, 1.5vw, 0.85rem);
-}
-
-.cardTitle {
+.intro {
   margin: 0;
-  font-size: clamp(0.72rem, 1.6vw + 0.4rem, 1.05rem);
+}
+
+.introText {
+  min-width: 0;
+}
+
+.heading {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.8vw + 0.5rem, 2.15rem);
   font-weight: 700;
-  line-height: 1.2;
-  color: var(--color-navy);
-  white-space: pre-line;
+  color: var(--home-ink, var(--color-navy));
+  line-height: 1.12;
+  padding-bottom: 0.42rem;
+  border-bottom: 2px solid var(--home-gold, var(--color-gold));
+  max-width: 24ch;
 }
 
-.cardArrow {
-  margin-top: auto;
-  padding-top: 0.35rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.3rem;
-  color: rgba(26, 54, 93, 0.45);
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.learnMore {
+.subhead {
+  margin: 0 0 0.65rem;
   font-family: var(--font-sans);
-  font-size: clamp(0.68rem, 1.35vw + 0.32rem, 0.82rem);
+  font-size: clamp(0.86rem, 1.1vw + 0.4rem, 1rem);
+  line-height: 1.55;
+  color: var(--color-muted);
+  max-width: 42ch;
+}
+
+.aboutLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-sans);
+  font-size: clamp(0.88rem, 1vw + 0.42rem, 0.98rem);
   font-weight: 600;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+  color: var(--home-ink, var(--color-navy));
+  text-decoration: none;
+  border-bottom: none;
+  padding-bottom: clamp(0.2rem, 0.45vw, 0.3rem);
+  width: fit-content;
+  position: relative;
+  transition: color 0.15s ease;
 }
 
-.card:hover .cardArrow {
-  color: var(--color-navy);
-  transform: translateX(2px);
+.aboutLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(0.38rem, 0.85vw, 0.48rem);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 20' preserveAspectRatio='none'%3E%3Cpath fill='%23d4af37' fill-opacity='0.82' d='M0,11 L28,8 L52,12 L88,7 L118,11 L152,8 L182,12 L218,9 L248,12 L282,8 L318,11 L352,9 L382,12 L400,10 L400,17 L378,19 L348,17 L312,19 L278,17 L242,19 L208,17 L172,19 L138,17 L102,19 L68,17 L32,19 L0,17 Z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
 }
 
-.accentOrange.card:hover .cardArrow {
+.aboutLink:hover {
   color: var(--color-orange);
 }
 
-.accentBlue.card:hover .cardArrow {
-  color: var(--color-blue);
+.aboutLink:hover::after {
+  opacity: 0.85;
+  filter: hue-rotate(-8deg);
 }
 
-.accentGold.card:hover .cardArrow {
-  color: var(--color-gold);
+.aboutArrow {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
 }
 
-.arrowIcon {
-  width: clamp(1.1rem, 3vw, 1.35rem);
-  height: clamp(1.1rem, 3vw, 1.35rem);
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* Four pillars in one row at every breakpoint (matches wide layouts) */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.35rem, 1.25vw, 1.35rem);
 }
 
-@media (max-width: 639px) {
-  .cardBody {
-    padding: clamp(0.55rem, 1.8vw, 0.75rem) clamp(0.65rem, 2vw, 0.9rem) clamp(0.5rem, 1.5vw, 0.65rem);
+.cell {
+  min-width: 0;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  padding: clamp(0.85rem, 2vw, 1.1rem);
+  text-decoration: none;
+  color: inherit;
+  border-radius: clamp(12px, 1.5vw, 18px);
+  overflow: hidden;
+  border: 1px solid rgba(26, 43, 60, 0.08);
+  box-shadow: 0 6px 20px rgba(26, 43, 60, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  background-color: #fffefb;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 15% 0%, rgba(255, 255, 255, 0.95) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 55% at 95% 100%, rgba(212, 175, 55, 0.08) 0%, transparent 55%);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  mix-blend-mode: multiply;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(26, 43, 60, 0.08);
+}
+
+.iconFrame {
+  position: relative;
+  width: min(100%, clamp(5.5rem, 16vw, 7.5rem));
+  aspect-ratio: 1;
+  margin-bottom: 0.55rem;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  filter: drop-shadow(0 4px 10px rgba(26, 43, 60, 0.08));
+}
+
+.iconWash {
+  position: absolute;
+  z-index: 0;
+  inset: -8%;
+  border-radius: 58% 42% 52% 48% / 46% 54% 48% 52%;
+  background:
+    radial-gradient(ellipse 72% 68% at 40% 35%, rgba(255, 252, 245, 0.98) 0%, rgba(250, 240, 220, 0.65) 48%, rgba(238, 224, 200, 0.35) 78%, transparent 100%),
+    radial-gradient(ellipse 50% 48% at 72% 78%, rgba(212, 175, 55, 0.16) 0%, transparent 62%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.iconArt {
+  position: relative;
+  z-index: 1;
+  width: 86%;
+  height: 86%;
+  border-radius: 50%;
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+.cardTitle {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.98rem, 1.2vw + 0.4rem, 1.12rem);
+  font-weight: 700;
+  color: var(--home-ink, var(--color-navy));
+  line-height: 1.2;
+}
+
+.cardDesc {
+  margin: 0 0 0.55rem;
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: clamp(0.74rem, 0.85vw + 0.32rem, 0.86rem);
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.cardCta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  font-family: var(--font-sans);
+  font-size: clamp(0.74rem, 0.88vw + 0.3rem, 0.84rem);
+  font-weight: 600;
+  color: var(--home-gold, var(--color-gold));
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.cardArrow {
+  width: 0.9rem;
+  height: 0.9rem;
+  flex-shrink: 0;
+}
+
+.card:hover .cardCta {
+  color: var(--color-orange);
+  transform: translateX(2px);
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: clamp(0.4rem, 1.8vw, 0.65rem) clamp(0.35rem, 1.2vw, 0.55rem);
+  }
+
+  .iconFrame {
+    width: min(100%, clamp(1.85rem, 16vw, 2.65rem));
+    margin-bottom: 0.3rem;
   }
 
   .cardTitle {
-    font-size: clamp(0.68rem, 2.2vw + 0.38rem, 0.95rem);
-    line-height: 1.15;
+    font-size: clamp(0.68rem, 2.4vw + 0.2rem, 0.82rem);
+    margin-bottom: 0.18rem;
   }
 
-  .arrowIcon {
-    width: 1rem;
-    height: 1rem;
+  .cardDesc {
+    margin-bottom: 0.3rem;
+    font-size: clamp(0.58rem, 1.9vw + 0.15rem, 0.7rem);
+    line-height: 1.32;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .cardCta {
+    font-size: clamp(0.56rem, 1.85vw + 0.12rem, 0.68rem);
+    gap: 0.08rem;
+  }
+
+  .cardArrow {
+    width: 0.72rem;
+    height: 0.72rem;
   }
 
   .card:hover {
-    transform: none;
-  }
-
-  .card:hover .cardArrow {
     transform: none;
   }
 }

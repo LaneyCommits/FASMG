@@ -1,6 +1,13 @@
 :root {
-  --color-cream: #fdfbf7;
-  --color-navy: #1a365d;
+  /* Homepage / brand palette (reference design) */
+  --home-ink: #1a2b3c;
+  --home-cream: #fdf8ee;
+  --home-gold: #d4af37;
+  --font-display: 'Playfair Display', 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --font-script-brand: 'Great Vibes', 'Caveat', cursive;
+
+  --color-cream: #fdf8ee;
+  --color-navy: #1a2b3c;
   --color-orange: #e28743;
   --color-blue: #a3c1ad;
   --color-gold: #d4af37;
@@ -71,7 +78,7 @@ a:hover {
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   color: var(--color-navy);
   font-weight: 700;
   line-height: 1.2;
